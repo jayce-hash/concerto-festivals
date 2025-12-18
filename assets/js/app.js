@@ -152,8 +152,9 @@ function closeModal(){
   modal.hidden = true;
 }
 
-const res = await fetch(DATA_URL, { cache: "no-store" });
-festivals = await res.json();
+async function init(){
+  const res = await fetch(DATA_URL, { cache: "no-store" });
+  festivals = await res.json();
 
   buildFilters(festivals);
 
