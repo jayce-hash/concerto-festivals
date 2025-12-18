@@ -153,8 +153,7 @@ function closeModal(){
 }
 
 const res = await fetch(DATA_URL, { cache: "no-store" });
-const data = await res.json();
-festivals = Array.isArray(data) ? data : (data.festivals || []);
+festivals = await res.json();
 
   buildFilters(festivals);
 
