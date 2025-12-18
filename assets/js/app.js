@@ -152,9 +152,9 @@ function closeModal(){
   modal.hidden = true;
 }
 
-async function init(){
-  const res = await fetch(DATA_URL, { cache: "no-store" });
-  festivals = await res.json();
+const res = await fetch(DATA_URL, { cache: "no-store" });
+const data = await res.json();
+festivals = Array.isArray(data) ? data : (data.festivals || []);
 
   buildFilters(festivals);
 
