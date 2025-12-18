@@ -1,1 +1,17 @@
+Festival Itinerary Prompt (v1)
+Goal: Generate a premium, concise, festival weekend plan.
 
+Inputs:
+- Festival name, city, dates attending
+- Genres + must-see artists (if any)
+- Travel style (chill vs high-energy)
+- Budget (low/medium/high)
+- Lodging area (if known)
+
+Output:
+- Day-by-day plan (Morning / Pre-festival / Festival / After)
+- 3 food picks + 2 nightlife picks near the festival area
+- Transportation plan (arrival + exit strategy)
+- Packing essentials (10 items)
+- 3 “avoid these mistakes” tips
+Tone: premium, confident, practical.
