@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Concerto — Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="ghost-btn" href="index.html">← Back</a>
+      <div class="brand">
+        <div class="brand-kicker">CONCERTO</div>
+        <div class="brand-title" id="festivalTitle">FESTIVAL</div>
+      </div>
+      <div class="topbar-actions">
+        <a class="ghost-btn" id="officialBtn" href="#" target="_blank" rel="noopener">Official</a>
+      </div>
+    </div>
+  </header>
 
+  <main class="container">
+    <section class="detail-hero">
+      <div class="detail-card">
+        <div class="detail-top">
+          <div>
+            <div class="kicker" id="festivalMeta">Loading…</div>
+            <h1 class="h1" id="festivalName">Festival</h1>
+            <p class="sub" id="festivalSub"></p>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <a class="primary-btn" id="ticketsBtn" href="#" target="_blank" rel="noopener">Tickets</a>
+          <a class="pill-btn" id="cityGuideBtn" href="#" target="_blank" rel="noopener">City Guide</a>
+          <a class="pill-btn" id="aiBtn" href="#" target="_blank" rel="noopener">Plan with AI</a>
+        </div>
+
+        <div class="detail-grid">
+          <div class="mini">
+            <div class="mini-label">Dates</div>
+            <div class="mini-value" id="datesVal">—</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Location</div>
+            <div class="mini-value" id="locVal">—</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Genres</div>
+            <div class="mini-value" id="genresVal">—</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Camping</div>
+            <div class="mini-value" id="campVal">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <div class="note-title">Next upgrades (fast)</div>
+        <div class="note-sub">Schedule tabs, set reminders, Top Picks for food + afters, and festival-specific tips.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/festival.js"></script>
+</body>
+</html>
