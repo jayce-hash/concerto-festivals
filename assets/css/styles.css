@@ -416,3 +416,103 @@ a{color:inherit;text-decoration:none}
   #arrivalCampingCard{ grid-column: auto; }
   .ess-grid{ grid-template-columns: 1fr; }
 }
+
+/* =========================
+   FESTIVALS — Full Dark Mode
+   Add <body class="fest-dark"> on festival pages only
+   ========================= */
+
+body.fest-dark{
+  --bg:#0E1830;
+  --ink:#F8F9F9;
+  --muted:rgba(248,249,249,.72);
+  --line:rgba(255,255,255,.10);
+  --card:#121E36;
+  --shadow:0 14px 38px rgba(0,0,0,.35);
+  --shadow2:0 4px 16px rgba(0,0,0,.28);
+  --accent:#F8F9F9;
+
+  background:var(--bg);
+  color:var(--ink);
+}
+
+/* Topbar */
+body.fest-dark .topbar{
+  background:rgba(14,24,48,.86);
+  border-bottom:1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+body.fest-dark .brand-kicker{ color: var(--muted); }
+
+/* Cards / surfaces */
+body.fest-dark .search,
+body.fest-dark .select,
+body.fest-dark .card,
+body.fest-dark .detail-card,
+body.fest-dark .mini,
+body.fest-dark .empty,
+body.fest-dark .modal-card,
+body.fest-dark .note,
+body.fest-dark .ess-card,
+body.fest-dark .stage{
+  background:var(--card);
+  border-color:var(--line);
+  box-shadow:var(--shadow2);
+}
+
+/* Muted text */
+body.fest-dark .sub,
+body.fest-dark .card-kicker,
+body.fest-dark .card-sub,
+body.fest-dark .tag,
+body.fest-dark .mini-label,
+body.fest-dark .kicker,
+body.fest-dark .note-sub,
+body.fest-dark .empty-sub,
+body.fest-dark .modal-body,
+body.fest-dark .muted,
+body.fest-dark .section-sub,
+body.fest-dark .ess-list,
+body.fest-dark .slot .time,
+body.fest-dark .stage-toggle{
+  color:var(--muted);
+}
+
+/* Inputs / chips / tags */
+body.fest-dark .search input{ color: var(--ink); }
+body.fest-dark .icon-btn{
+  background:rgba(255,255,255,.06);
+  border-color:var(--line);
+  color:var(--muted);
+}
+body.fest-dark .chip,
+body.fest-dark .tag,
+body.fest-dark .pill-btn,
+body.fest-dark .lineup-tab{
+  background:rgba(255,255,255,.06);
+  border-color:var(--line);
+  color:var(--ink);
+}
+body.fest-dark .lineup-tab[aria-selected="true"]{
+  border-color:rgba(255,255,255,.55);
+}
+
+/* Primary button flips (light button on dark) */
+body.fest-dark .primary-btn{
+  background:#F8F9F9;
+  color:#121E36;
+  border-color:rgba(255,255,255,.15);
+}
+
+/* Ghost button on dark */
+body.fest-dark .ghost-btn{
+  color:var(--muted);
+  border-color:var(--line);
+}
+body.fest-dark .ghost-btn:hover{
+  background:rgba(255,255,255,.06);
+}
+
+/* Lineup separators */
+body.fest-dark .stage-body{ border-top-color: var(--line); }
+body.fest-dark .slot{ border-bottom-color: rgba(255,255,255,.08); }
