@@ -337,14 +337,24 @@ async function init(){
   ticketsBtn.style.pointerEvents = (ticketsBtn.href === "#") ? "none" : "auto";
   ticketsBtn.style.opacity = (ticketsBtn.href === "#") ? "0.5" : "1";
 
-  const cityGuideBtn = document.getElementById("cityGuideBtn");
-  if(f.cityGuideVenueKey){
-    cityGuideBtn.href = `https://concerto-venue-map.netlify.app/?venue=${encodeURIComponent(f.cityGuideVenueKey)}`;
-  } else {
-    cityGuideBtn.href = "#";
-    cityGuideBtn.style.pointerEvents = "none";
-    cityGuideBtn.style.opacity = "0.5";
-  }
+// City Guide link (Festival Map deploy w/ lat/lng + venue)
+const cityGuideBtn = document.getElementById("cityGuideBtn");
+const FEST_GUIDE_BASE = "https://fantastic-squirrel-0f95b8.netlify.app/";
+
+const lat = f.coordinates?.lat;
+const lng = f.coordinates?.lng;
+
+if(typeof lat === "number" && typeof lng === "number"){
+  const venueParam = encodeURIComponent(f.name); // matches your Map JSON's "venue=" naming
+  cityGuideBtn.href = `${FEST_GUIDE_BASE}?lat=${lat}&lng=${lng}&venue=${venueParam}`;
+  cityGuideBtn.style.pointerEvents = "auto";
+  cityGuideBtn.style.opacity = "1";
+} else {
+  // fallback (only if coords missing)
+  cityGuideBtn.href = "#";
+  cityGuideBtn.style.pointerEvents = "none";
+  cityGuideBtn.style.opacity = "0.5";
+}
 
   const aiBtn = document.getElementById("aiBtn");
   aiBtn.href = `#`;
