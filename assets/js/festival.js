@@ -337,20 +337,26 @@ async function init(){
   ticketsBtn.style.pointerEvents = (ticketsBtn.href === "#") ? "none" : "auto";
   ticketsBtn.style.opacity = (ticketsBtn.href === "#") ? "0.5" : "1";
 
-// City Guide link (Festival Map deploy w/ lat/lng + venue)
+// City Guide link (canonical)
 const cityGuideBtn = document.getElementById("cityGuideBtn");
-const FEST_GUIDE_BASE = "https://fantastic-squirrel-0f95b8.netlify.app/";
+const CITY_GUIDE_BASE = "https://concerto-venue-map.netlify.app/";
 
 const lat = f.coordinates?.lat;
 const lng = f.coordinates?.lng;
 
-if(typeof lat === "number" && typeof lng === "number"){
-  const venueParam = encodeURIComponent(f.name); // matches your Map JSON's "venue=" naming
-  cityGuideBtn.href = `${FEST_GUIDE_BASE}?lat=${lat}&lng=${lng}&venue=${venueParam}`;
+// Prefer coordinates (best for festivals)
+if (typeof lat === "number" && typeof lng === "number") {
+  cityGuideBtn.href = `${CITY_GUIDE_BASE}?lat=${lat}&lng=${lng}&venue=${encodeURIComponent(f.name)}`;
   cityGuideBtn.style.pointerEvents = "auto";
   cityGuideBtn.style.opacity = "1";
-} else {
-  // fallback (only if coords missing)
+}
+// Fallback: old key-based links if you ever have them
+else if (f.cityGuideVenueKey) {
+  cityGuideBtn.href = `${CITY_GUIDE_BASE}?venue=${encodeURIComponent(f.cityGuideVenueKey)}`;
+  cityGuideBtn.style.pointerEvents = "auto";
+  cityGuideBtn.style.opacity = "1";
+}
+else {
   cityGuideBtn.href = "#";
   cityGuideBtn.style.pointerEvents = "none";
   cityGuideBtn.style.opacity = "0.5";
