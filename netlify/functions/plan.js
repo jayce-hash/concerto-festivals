@@ -112,8 +112,13 @@ If savedSets exist, prioritize them and avoid conflicts.
           },
         ],
         text: {
-          format: { type: "json_schema", json_schema: schema },
-        },
+  format: {
+    type: "json_schema",
+    name: "festival_plan",
+    schema: schema.schema,
+    strict: true
+  }
+},
       }),
     });
 
