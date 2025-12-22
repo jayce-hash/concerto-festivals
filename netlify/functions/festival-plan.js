@@ -74,26 +74,26 @@ Tone: concise, premium, helpful.
         input: [
           {
             role: "user",
-            content: [
-              {
-                type: "text",
-                text: JSON.stringify({
-                  festival: {
-                    id: festival.id,
-                    name: festival.name,
-                    city: festival.city,
-                    state: festival.state,
-                    country: festival.country,
-                    venue: festival.venue,
-                    startDate: festival.startDate,
-                    endDate: festival.endDate,
-                    genres: festival.genres,
-                    hasCamping: festival.hasCamping
-                  },
-                  prefs: prefs || {}
-                })
-              }
-            ]
+     content: [
+  {
+    type: "input_text",
+    text: JSON.stringify({
+      festival: {
+        id: festival.id,
+        name: festival.name,
+        city: festival.city,
+        state: festival.state,
+        country: festival.country,
+        venue: festival.venue,
+        startDate: festival.startDate,
+        endDate: festival.endDate,
+        genres: festival.genres,
+        hasCamping: festival.hasCamping
+      },
+      prefs: prefs || {}
+    })
+  }
+]
           }
         ],
         text: {
@@ -104,7 +104,7 @@ Tone: concise, premium, helpful.
 
     if (!openaiRes.ok) {
       const errText = await openaiRes.text();
-      return new Response(errText, { status: 500 });
+      return new Response(errText, { status: openaiRes.status });
     }
 
     const data = await openaiRes.json();
