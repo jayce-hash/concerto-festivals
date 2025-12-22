@@ -458,10 +458,9 @@ function initSectionToggles(){
     btn.textContent = expanded ? "Hide" : "Show";
 
     btn.addEventListener("click", ()=>{
-      const isHidden = !target.hidden; // current visible => will hide
-      target.hidden = isHidden;
+      const nowExpanded = btn.getAttribute("aria-expanded") !== "true";
+      target.hidden = !nowExpanded;
 
-      const nowExpanded = !target.hidden;
       btn.setAttribute("aria-expanded", nowExpanded ? "true" : "false");
       btn.textContent = nowExpanded ? "Hide" : "Show";
     });
