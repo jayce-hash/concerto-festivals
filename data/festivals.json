@@ -14,6 +14,32 @@
     "officialUrl": "https://www.coachella.com",
     "hasCamping": true,
     "cityGuideVenueKey": "Empire Polo Club"
+    {
+    "id": "coachella",
+    "name": "Coachella Valley Music and Arts Festival",
+    "city": "Indio",
+    "state": "CA",
+    "country": "USA",
+    "startDate": "2026-04-10",
+    "endDate": "2026-04-19",
+    "genres": ["Pop", "EDM", "Hip-Hop", "Indie"],
+    "venue": "Empire Polo Club",
+    "coordinates": { "lat": 33.6784, "lng": -116.2377 },
+    "ticketUrl": "https://www.coachella.com",
+    "officialUrl": "https://www.coachella.com",
+    "hasCamping": true,
+    "cityGuideVenueKey": "Empire Polo Club",
+    "lineup": {
+      "2026-04-10": {
+        "Main Stage": [
+          { "artist": "Example Artist", "time": "6:10 PM" },
+          { "artist": "Headliner", "time": "10:35 PM" }
+        ],
+        "Sahara": [
+          { "artist": "DJ Example", "time": "9:20 PM" }
+        ]
+      }
+    }
   },
   {
     "id": "stagecoach",
