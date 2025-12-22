@@ -30,20 +30,26 @@ Create a 1-day festival plan:
 - Food + hydration timing
 - Exit plan + rideshare tip
 Keep it tight and practical.
-`;
+`.trim();
 
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+    const resp = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         model: "gpt-4.1-mini",
         temperature: 0.6,
-        messages: [
-          { role: "system", content: system },
-          { role: "user", content: user },
+        input: [
+          {
+            role: "system",
+            content: [{ type: "input_text", text: system }],
+          },
+          {
+            role: "user",
+            content: [{ type: "input_text", text: user }],
+          },
         ],
       }),
     });
@@ -54,7 +60,12 @@ Keep it tight and practical.
     }
 
     const data = await resp.json();
-    const text = data?.choices?.[0]?.message?.content ?? "No response.";
+
+    // Responses API: easiest accessor
+    const text =
+      data?.output_text ||
+      data?.output?.[0]?.content?.map((c) => c?.text).filter(Boolean).join("\n") ||
+      "No response.";
 
     return new Response(JSON.stringify({ text }), {
       status: 200,
