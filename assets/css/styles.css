@@ -516,3 +516,41 @@ body.fest-dark .ghost-btn:hover{
 /* Lineup separators */
 body.fest-dark .stage-body{ border-top-color: var(--line); }
 body.fest-dark .slot{ border-bottom-color: rgba(255,255,255,.08); }
+
+/* ===== Schedule: Save Stars + Conflicts ===== */
+.slot{
+  align-items:center;
+}
+
+.slot .meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+}
+
+.star-btn{
+  width:30px;height:30px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.06);
+  cursor:pointer;
+  user-select:none;
+  font-size:16px;
+  line-height:1;
+}
+
+.star-btn[aria-pressed="true"]{
+  border-color: rgba(255,255,255,0.55);
+}
+
+.conflict-pill{
+  font-size:11px;
+  padding:5px 8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.08);
+  color:var(--muted);
+  white-space:nowrap;
+}
