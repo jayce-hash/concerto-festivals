@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <!-- Daily Lineup (kept as the “hero feature” below the festival card) -->
+      <!-- Daily Lineup -->
       <section class="section-card" id="lineupSection" hidden>
         <div class="section-head section-head--row">
           <div>
@@ -86,7 +86,7 @@
         </div>
       </section>
 
-      <!-- Arrival (accordion) -->
+      <!-- Arrival -->
       <section class="section-card" id="arrivalSection">
         <div class="section-head section-head--row">
           <div>
@@ -124,7 +124,7 @@
         </div>
       </section>
 
-      <!-- Essentials (accordion) -->
+      <!-- Essentials -->
       <section class="section-card" id="essentialsSection">
         <div class="section-head section-head--row">
           <div>
@@ -166,32 +166,5 @@
   </main>
 
   <script src="assets/js/festival.js"></script>
-
-  <!-- Simple accordion behavior (no changes needed to festival.js) -->
-  <script>
-    (function () {
-      function syncBtn(btn, expanded) {
-        btn.setAttribute("aria-expanded", expanded ? "true" : "false");
-        btn.textContent = expanded ? "Hide" : "Show";
-      }
-
-      document.querySelectorAll(".section-toggle[data-toggle]").forEach((btn) => {
-        const sel = btn.getAttribute("data-toggle");
-        const body = document.querySelector(sel);
-        if (!body) return;
-
-        // Ensure defaults are collapsed unless you want them open
-        syncBtn(btn, !body.hasAttribute("hidden") && body.style.display !== "none");
-
-        btn.addEventListener("click", () => {
-          const isHidden = body.hasAttribute("hidden");
-          if (isHidden) body.removeAttribute("hidden");
-          else body.setAttribute("hidden", "");
-
-          syncBtn(btn, isHidden);
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
