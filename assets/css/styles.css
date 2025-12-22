@@ -527,3 +527,23 @@ body.fest-dark .primary-btn{
   #arrivalCampingCard{ grid-column:auto; }
   .ess-grid{ grid-template-columns: 1fr; }
 }
+
+/* =========================
+   Festival list chips — dark mode fix
+   ========================= */
+
+body.fest-dark .chip,
+body.fest-dark .tag,
+body.fest-dark .filter-pill,
+body.fest-dark .month-pill,
+body.fest-dark .genre-pill {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+  color: rgba(248,249,249,0.85);
+}
+
+/* Hover / active (subtle, not white) */
+body.fest-dark .chip:hover,
+body.fest-dark .tag:hover {
+  background: rgba(255,255,255,0.12);
+}
