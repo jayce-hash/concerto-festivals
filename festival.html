@@ -64,67 +64,7 @@
      Guided Festival Layer
      ========================= -->
 
-<!-- 1) Arrival & Getting In -->
-<section class="section arrival-section" id="arrivalSection">
-  <div class="section-head">
-    <div class="section-title">Arrival & Getting In</div>
-    <div class="section-sub">When to arrive, what to do first, and what to avoid.</div>
-  </div>
-
-  <div class="arrival-grid">
-    <div class="arrival-card">
-      <div class="arrival-label">Best Arrival Windows</div>
-      <div class="arrival-rows" id="arrivalWindows"></div>
-    </div>
-
-    <div class="arrival-card">
-      <div class="arrival-label">First 10 Minutes</div>
-      <ul class="arrival-list" id="arrivalFirstSteps"></ul>
-    </div>
-
-    <div class="arrival-card">
-      <div class="arrival-label">Avoid These Mistakes</div>
-      <ul class="arrival-list" id="arrivalWarnings"></ul>
-    </div>
-
-    <div class="arrival-card" id="arrivalCampingCard" hidden>
-      <div class="arrival-label">Camping Notes</div>
-      <ul class="arrival-list" id="arrivalCamping"></ul>
-    </div>
-  </div>
-</section>
-
-<!-- 2) Essentials -->
-<section class="section" id="essentialsSection">
-  <div class="section-head">
-    <div class="section-title">Essentials</div>
-    <div class="section-sub">What to bring so nothing ruins your day.</div>
-  </div>
-
-  <div class="ess-grid">
-    <div class="ess-card">
-      <div class="ess-label">Core</div>
-      <ul class="ess-list" id="essBase"></ul>
-    </div>
-
-    <div class="ess-card">
-      <div class="ess-label">Weather</div>
-      <ul class="ess-list" id="essWeather"></ul>
-    </div>
-
-    <div class="ess-card" id="essCampingCard" hidden>
-      <div class="ess-label">Camping</div>
-      <ul class="ess-list" id="essCamping"></ul>
-    </div>
-
-    <div class="ess-card" id="essNotesCard" hidden>
-      <div class="ess-label">Quick Notes</div>
-      <ul class="ess-list" id="essNotes"></ul>
-    </div>
-  </div>
-</section>
-
-<!-- 3) Daily Lineup (hidden until a festival has lineup data) -->
+      <!-- 3) Daily Lineup (hidden until a festival has lineup data) -->
 <section class="section" id="lineupSection" hidden>
   <div class="section-head">
     <div class="section-title">Daily Lineup</div>
@@ -139,12 +79,81 @@
   </div>
 </section>
 
-      <div class="note">
-        <div class="note-title">Next upgrades (fast)</div>
-        <div class="note-sub">Schedule tabs, set reminders, Top Picks for food + afters, and festival-specific tips.</div>
+<!-- 1) Arrival & Getting In -->
+<section class="section arrival-section" id="arrivalSection">
+  <div class="section-head section-head--row">
+    <div>
+      <div class="section-title">Arrival & Getting In</div>
+      <div class="section-sub">When to arrive, what to do first, and what to avoid.</div>
+    </div>
+
+    <button class="section-toggle" type="button" data-toggle="#arrivalBody" aria-expanded="true">
+      Hide
+    </button>
+  </div>
+
+  <div id="arrivalBody">
+    <div class="arrival-grid">
+      <div class="arrival-card">
+        <div class="arrival-label">Best Arrival Windows</div>
+        <div class="arrival-rows" id="arrivalWindows"></div>
       </div>
-    </section>
-  </main>
+
+      <div class="arrival-card">
+        <div class="arrival-label">First 10 Minutes</div>
+        <ul class="arrival-list" id="arrivalFirstSteps"></ul>
+      </div>
+
+      <div class="arrival-card">
+        <div class="arrival-label">Avoid These Mistakes</div>
+        <ul class="arrival-list" id="arrivalWarnings"></ul>
+      </div>
+
+      <div class="arrival-card" id="arrivalCampingCard" hidden>
+        <div class="arrival-label">Camping Notes</div>
+        <ul class="arrival-list" id="arrivalCamping"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2) Essentials -->
+<section class="section" id="essentialsSection">
+  <div class="section-head section-head--row">
+    <div>
+      <div class="section-title">Essentials</div>
+      <div class="section-sub">What to bring so nothing ruins your day.</div>
+    </div>
+
+    <button class="section-toggle" type="button" data-toggle="#essentialsBody" aria-expanded="true">
+      Hide
+    </button>
+  </div>
+
+  <div id="essentialsBody">
+    <div class="ess-grid">
+      <div class="ess-card">
+        <div class="ess-label">Core</div>
+        <ul class="ess-list" id="essBase"></ul>
+      </div>
+
+      <div class="ess-card">
+        <div class="ess-label">Weather</div>
+        <ul class="ess-list" id="essWeather"></ul>
+      </div>
+
+      <div class="ess-card" id="essCampingCard" hidden>
+        <div class="ess-label">Camping</div>
+        <ul class="ess-list" id="essCamping"></ul>
+      </div>
+
+      <div class="ess-card" id="essNotesCard" hidden>
+        <div class="ess-label">Quick Notes</div>
+        <ul class="ess-list" id="essNotes"></ul>
+      </div>
+    </div>
+  </div>
+</section>
 
   <script src="assets/js/festival.js"></script>
 </body>
