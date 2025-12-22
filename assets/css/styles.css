@@ -547,3 +547,30 @@ body.fest-dark .chip:hover,
 body.fest-dark .tag:hover {
   background: rgba(255,255,255,0.12);
 }
+
+/* =========================
+   FESTIVALS — Button polish fixes
+   ========================= */
+
+/* 1) Festival page action buttons should ALL match pill style */
+body.fest-dark .detail-actions .primary-btn {
+  background: rgba(255,255,255,0.06);
+  color: var(--ink);
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+/* Optional: subtle hover */
+body.fest-dark .detail-actions .primary-btn:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+/* 2) Fix rogue white pill in festival search row */
+body.fest-dark .search-row .pill-btn,
+body.fest-dark .search-row button,
+body.fest-dark .search-row input[type="checkbox"],
+body.fest-dark .search-row input[type="radio"] {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--line);
+  color: var(--ink);
+}
