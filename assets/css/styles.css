@@ -648,3 +648,83 @@ body.fest-dark .empty-sub{ color: var(--muted) !important; }
 }
 #aiResult ul{ margin:0; padding-left:18px; }
 #aiResult li{ margin:6px 0; line-height:1.35; }
+
+/* ===== AI Modal ===== */
+.modal-card--wide{ width:min(720px, calc(100% - 26px)); }
+
+.modal-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.icon-x{
+  width:34px;height:34px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--ink);
+  cursor:pointer;
+  font-size:20px;
+  line-height:1;
+}
+
+.ai-grid{
+  display:grid;
+  grid-template-columns: 180px 1fr;
+  gap:12px;
+}
+
+.ai-field{ display:flex; flex-direction:column; gap:6px; }
+.ai-field--full{ grid-column: 1 / -1; }
+
+.ai-label{
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.ai-input, .ai-select{
+  width:100%;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--ink);
+  padding:12px 12px;
+  outline:none;
+}
+
+.ai-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+
+.ai-result{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+  background:rgba(255,255,255,.06);
+}
+
+.ai-result-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.ai-result-body{
+  color:var(--ink);
+  line-height:1.45;
+}
+
+.ai-foot{ margin-top:12px; }
+@media (max-width:520px){
+  .ai-grid{ grid-template-columns: 1fr; }
+}
