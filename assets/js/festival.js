@@ -441,6 +441,34 @@ function renderLineup(f){
 }
 
 /* =========================
+   Section Toggles (Arrival / Essentials)
+   Uses: button[data-toggle="#someId"]
+   ========================= */
+function initSectionToggles(){
+  document.querySelectorAll("[data-toggle]").forEach(btn=>{
+    const sel = btn.getAttribute("data-toggle");
+    if(!sel) return;
+
+    const target = document.querySelector(sel);
+    if(!target) return;
+
+    // Default: expanded unless aria-expanded="false"
+    const expanded = btn.getAttribute("aria-expanded") !== "false";
+    target.hidden = !expanded;
+    btn.textContent = expanded ? "Hide" : "Show";
+
+    btn.addEventListener("click", ()=>{
+      const isHidden = !target.hidden; // current visible => will hide
+      target.hidden = isHidden;
+
+      const nowExpanded = !target.hidden;
+      btn.setAttribute("aria-expanded", nowExpanded ? "true" : "false");
+      btn.textContent = nowExpanded ? "Hide" : "Show";
+    });
+  });
+}
+
+/* =========================
    Init
    ========================= */
 
@@ -516,6 +544,9 @@ async function init(){
   renderArrival(f);
   renderEssentials(f);
   renderLineup(f);
+
+  // NEW: wire up Arrival/Essentials show/hide buttons
+  initSectionToggles();
 }
 
 init().catch(console.error);
