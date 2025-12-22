@@ -608,3 +608,29 @@ body.fest-dark .modal-card .ghost-btn{
   border-color: var(--line);
   color: var(--ink);
 }
+
+/* =========================
+   FESTIVALS — Fix search input text color (iPad/Safari)
+   ========================= */
+body.fest-dark .search input{
+  color: var(--ink) !important;
+  -webkit-text-fill-color: var(--ink) !important;
+  caret-color: var(--ink);
+}
+
+body.fest-dark .search input::placeholder{
+  color: rgba(248,249,249,.55);
+  -webkit-text-fill-color: rgba(248,249,249,.55);
+}
+
+/* =========================
+   FESTIVALS — Fix "No matches" empty state surface
+   ========================= */
+body.fest-dark .empty{
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+
+body.fest-dark .empty-title{ color: var(--ink) !important; }
+body.fest-dark .empty-sub{ color: var(--muted) !important; }
