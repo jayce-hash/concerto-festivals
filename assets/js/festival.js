@@ -534,10 +534,89 @@ async function init(){
     cityGuideBtn.style.opacity = "0.5";
   }
 
-  const aiBtn = document.getElementById("aiBtn");
-  aiBtn.href = `#`;
-  aiBtn.style.pointerEvents = "none";
-  aiBtn.style.opacity = "0.5";
+const aiBtn = document.getElementById("aiBtn");
+aiBtn.href = "#";
+aiBtn.style.pointerEvents = "auto";
+aiBtn.style.opacity = "1";
+
+const modal = document.getElementById("aiModal");
+const closeEls = modal?.querySelectorAll("[data-close]");
+const cancelBtn = document.getElementById("aiCancel");
+const genBtn = document.getElementById("aiGenerate");
+const resultEl = document.getElementById("aiResult");
+
+function openModal(){ modal.hidden = false; }
+function closeModal(){ modal.hidden = true; }
+
+aiBtn.addEventListener("click", (e)=>{
+  e.preventDefault();
+  openModal();
+});
+
+closeEls?.forEach(el => el.addEventListener("click", closeModal));
+cancelBtn?.addEventListener("click", closeModal);
+
+genBtn?.addEventListener("click", async ()=>{
+  resultEl.innerHTML = `<div class="muted">Generating…</div>`;
+
+  const prefs = {
+    vibe: document.getElementById("aiVibe")?.value || "",
+    budget: document.getElementById("aiBudget")?.value || "",
+    must_see: (document.getElementById("aiMustSee")?.value || "")
+      .split(",").map(s=>s.trim()).filter(Boolean)
+  };
+
+  const res = await fetch("/.netlify/functions/festival-plan", {
+    method: "POST",
+    headers: { "Content-Type":"application/json" },
+    body: JSON.stringify({ festival: f, prefs })
+  });
+
+  if(!res.ok){
+    const t = await res.text();
+    resultEl.innerHTML = `<div class="ai-block"><div class="ai-h">Error</div><div class="muted">${t}</div></div>`;
+    return;
+  }
+
+  const plan = await res.json();
+
+  resultEl.innerHTML = `
+    <div class="ai-block">
+      <div class="ai-h">Summary</div>
+      <div class="muted">${plan.summary}</div>
+    </div>
+
+    <div class="ai-block">
+      <div class="ai-h">Arrival</div>
+      <ul>${plan.arrival.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+
+    <div class="ai-block">
+      <div class="ai-h">Essentials</div>
+      <ul>${plan.essentials.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+
+    <div class="ai-block">
+      <div class="ai-h">Daily Plan</div>
+      ${plan.daily_plan.map(d => `
+        <div style="margin-top:10px">
+          <div style="font-weight:600;margin-bottom:6px">${d.day_label}</div>
+          <ul>${d.timeline.map(t=>`<li><b>${t.time}</b> — ${t.title}: ${t.detail}</li>`).join("")}</ul>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="ai-block">
+      <div class="ai-h">Food + Afters</div>
+      <ul>${plan.food_and_afters.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+
+    <div class="ai-block">
+      <div class="ai-h">Pro Tips</div>
+      <ul>${plan.pro_tips.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+  `;
+});
 
   // Guided Festival Layer
   renderArrival(f);
