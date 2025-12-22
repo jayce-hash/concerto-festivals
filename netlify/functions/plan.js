@@ -3,35 +3,24 @@ import OpenAI from "openai";
 export const handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
-      return {
-        statusCode: 405,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ok: false, error: "Method Not Allowed" }),
-      };
+      return json(405, { ok: false, error: "Method Not Allowed" });
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      return {
-        statusCode: 500,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ok: false, error: "Missing OPENAI_API_KEY env var" }),
-      };
+      return json(500, { ok: false, error: "Missing OPENAI_API_KEY env var" });
     }
 
     const body = JSON.parse(event.body || "{}");
     const { festival, day, prompt, lineup, savedSets } = body || {};
 
     if (!festival?.name) {
-      return {
-        statusCode: 400,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ok: false, error: "Missing festival.name" }),
-      };
+      return json(400, { ok: false, error: "Missing festival.name" });
     }
 
     const client = new OpenAI({ apiKey });
 
+    // ---- Schema the model MUST return
     const schema = {
       name: "festival_plan",
       schema: {
@@ -96,11 +85,13 @@ If lineup is missing, build a smart plan around arrival, pacing, hydration/food,
 If savedSets exist, prioritize them and avoid conflicts (suggest swaps).
 `.trim();
 
-    // Keep payloads safe-sized
-    const safeLineup =
-      lineup && typeof lineup === "object"
-        ? JSON.parse(JSON.stringify(lineup).slice(0, 20000) || "null")
-        : lineup || null;
+    // ✅ Safe lineup: don't slice JSON strings (can corrupt)
+    // Just limit depth/size by selecting only the requested day if possible.
+    let lineupForDay = null;
+    if (lineup && typeof lineup === "object") {
+      if (day && lineup[day]) lineupForDay = { [day]: lineup[day] };
+      else lineupForDay = lineup; // fallback
+    }
 
     const userPayload = {
       festival: {
@@ -117,7 +108,7 @@ If savedSets exist, prioritize them and avoid conflicts (suggest swaps).
       },
       day: day || "Day 1",
       user_preferences: prompt || "",
-      lineup: safeLineup,
+      lineup: lineupForDay,
       savedSets: Array.isArray(savedSets) ? savedSets.slice(0, 200) : [],
     };
 
@@ -138,32 +129,27 @@ If savedSets exist, prioritize them and avoid conflicts (suggest swaps).
       resp.output?.[0]?.content?.find?.((c) => c.type === "output_text")?.text ||
       "";
 
-    // Validate JSON parse
     let plan;
     try {
       plan = JSON.parse(outText);
-    } catch (e) {
-      return {
-        statusCode: 502,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ok: false,
-          error: "Model did not return valid JSON",
-          raw: outText,
-        }),
-      };
+    } catch {
+      return json(502, {
+        ok: false,
+        error: "Model did not return valid JSON",
+        raw: outText,
+      });
     }
 
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ok: true, plan }),
-    };
+    return json(200, { ok: true, plan });
   } catch (err) {
-    return {
-      statusCode: 500,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ok: false, error: String(err?.message || err) }),
-    };
+    return json(500, { ok: false, error: String(err?.message || err) });
   }
 };
+
+function json(statusCode, obj) {
+  return {
+    statusCode,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(obj),
+  };
+}
