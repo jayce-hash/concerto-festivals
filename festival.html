@@ -4,19 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Concerto — Festival</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
+
 <body class="fest-dark">
   <header class="topbar">
     <div class="topbar-inner">
       <a class="ghost-btn" href="index.html">← Back</a>
+
       <div class="brand">
         <div class="brand-kicker">CONCERTO</div>
         <div class="brand-title" id="festivalTitle">FESTIVAL</div>
       </div>
+
       <div class="topbar-actions">
         <a class="ghost-btn" id="officialBtn" href="#" target="_blank" rel="noopener">Official</a>
       </div>
@@ -25,6 +30,8 @@
 
   <main class="container">
     <section class="detail-hero">
+
+      <!-- Festival Card -->
       <div class="detail-card">
         <div class="detail-top">
           <div>
@@ -60,101 +67,131 @@
         </div>
       </div>
 
-      <!-- =========================
-     Guided Festival Layer
-     ========================= -->
+      <!-- Daily Lineup (kept as the “hero feature” below the festival card) -->
+      <section class="section-card" id="lineupSection" hidden>
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-title">Daily Lineup</div>
+            <div class="section-sub">Who’s playing, where, and when.</div>
+          </div>
+        </div>
 
-      <!-- 3) Daily Lineup (hidden until a festival has lineup data) -->
-<section class="section" id="lineupSection" hidden>
-  <div class="section-head">
-    <div class="section-title">Daily Lineup</div>
-    <div class="section-sub">Who’s playing, where, and when.</div>
-  </div>
+        <div class="section-body">
+          <div class="lineup-tabs" id="lineupTabs"></div>
+          <div class="lineup-days" id="lineupDays"></div>
 
-  <div class="lineup-tabs" id="lineupTabs"></div>
-  <div class="lineup-days" id="lineupDays"></div>
+          <div class="lineup-footnote" id="lineupFootnote">
+            Times are shown as provided by the festival schedule.
+          </div>
+        </div>
+      </section>
 
-  <div class="lineup-footnote" id="lineupFootnote">
-    Times are shown as provided by the festival schedule.
-  </div>
-</section>
+      <!-- Arrival (accordion) -->
+      <section class="section-card" id="arrivalSection">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-title">Arrival & Getting In</div>
+            <div class="section-sub">When to arrive, what to do first, and what to avoid.</div>
+          </div>
 
-<!-- 1) Arrival & Getting In -->
-<section class="section arrival-section" id="arrivalSection">
-  <div class="section-head section-head--row">
-    <div>
-      <div class="section-title">Arrival & Getting In</div>
-      <div class="section-sub">When to arrive, what to do first, and what to avoid.</div>
-    </div>
+          <button class="section-toggle" type="button" data-toggle="#arrivalBody" aria-expanded="false">
+            Show
+          </button>
+        </div>
 
-    <button class="section-toggle" type="button" data-toggle="#arrivalBody" aria-expanded="true">
-      Hide
-    </button>
-  </div>
+        <div class="section-body" id="arrivalBody" hidden>
+          <div class="arrival-grid">
+            <div class="arrival-card">
+              <div class="arrival-label">Best Arrival Windows</div>
+              <div class="arrival-rows" id="arrivalWindows"></div>
+            </div>
 
-  <div id="arrivalBody">
-    <div class="arrival-grid">
-      <div class="arrival-card">
-        <div class="arrival-label">Best Arrival Windows</div>
-        <div class="arrival-rows" id="arrivalWindows"></div>
-      </div>
+            <div class="arrival-card">
+              <div class="arrival-label">First 10 Minutes</div>
+              <ul class="arrival-list" id="arrivalFirstSteps"></ul>
+            </div>
 
-      <div class="arrival-card">
-        <div class="arrival-label">First 10 Minutes</div>
-        <ul class="arrival-list" id="arrivalFirstSteps"></ul>
-      </div>
+            <div class="arrival-card">
+              <div class="arrival-label">Avoid These Mistakes</div>
+              <ul class="arrival-list" id="arrivalWarnings"></ul>
+            </div>
 
-      <div class="arrival-card">
-        <div class="arrival-label">Avoid These Mistakes</div>
-        <ul class="arrival-list" id="arrivalWarnings"></ul>
-      </div>
+            <div class="arrival-card" id="arrivalCampingCard" hidden>
+              <div class="arrival-label">Camping Notes</div>
+              <ul class="arrival-list" id="arrivalCamping"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="arrival-card" id="arrivalCampingCard" hidden>
-        <div class="arrival-label">Camping Notes</div>
-        <ul class="arrival-list" id="arrivalCamping"></ul>
-      </div>
-    </div>
-  </div>
-</section>
+      <!-- Essentials (accordion) -->
+      <section class="section-card" id="essentialsSection">
+        <div class="section-head section-head--row">
+          <div>
+            <div class="section-title">Essentials</div>
+            <div class="section-sub">What to bring so nothing ruins your day.</div>
+          </div>
 
-<!-- 2) Essentials -->
-<section class="section" id="essentialsSection">
-  <div class="section-head section-head--row">
-    <div>
-      <div class="section-title">Essentials</div>
-      <div class="section-sub">What to bring so nothing ruins your day.</div>
-    </div>
+          <button class="section-toggle" type="button" data-toggle="#essentialsBody" aria-expanded="false">
+            Show
+          </button>
+        </div>
 
-    <button class="section-toggle" type="button" data-toggle="#essentialsBody" aria-expanded="true">
-      Hide
-    </button>
-  </div>
+        <div class="section-body" id="essentialsBody" hidden>
+          <div class="ess-grid">
+            <div class="ess-card">
+              <div class="ess-label">Core</div>
+              <ul class="ess-list" id="essBase"></ul>
+            </div>
 
-  <div id="essentialsBody">
-    <div class="ess-grid">
-      <div class="ess-card">
-        <div class="ess-label">Core</div>
-        <ul class="ess-list" id="essBase"></ul>
-      </div>
+            <div class="ess-card">
+              <div class="ess-label">Weather</div>
+              <ul class="ess-list" id="essWeather"></ul>
+            </div>
 
-      <div class="ess-card">
-        <div class="ess-label">Weather</div>
-        <ul class="ess-list" id="essWeather"></ul>
-      </div>
+            <div class="ess-card" id="essCampingCard" hidden>
+              <div class="ess-label">Camping</div>
+              <ul class="ess-list" id="essCamping"></ul>
+            </div>
 
-      <div class="ess-card" id="essCampingCard" hidden>
-        <div class="ess-label">Camping</div>
-        <ul class="ess-list" id="essCamping"></ul>
-      </div>
+            <div class="ess-card" id="essNotesCard" hidden>
+              <div class="ess-label">Quick Notes</div>
+              <ul class="ess-list" id="essNotes"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="ess-card" id="essNotesCard" hidden>
-        <div class="ess-label">Quick Notes</div>
-        <ul class="ess-list" id="essNotes"></ul>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
   <script src="assets/js/festival.js"></script>
+
+  <!-- Simple accordion behavior (no changes needed to festival.js) -->
+  <script>
+    (function () {
+      function syncBtn(btn, expanded) {
+        btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+        btn.textContent = expanded ? "Hide" : "Show";
+      }
+
+      document.querySelectorAll(".section-toggle[data-toggle]").forEach((btn) => {
+        const sel = btn.getAttribute("data-toggle");
+        const body = document.querySelector(sel);
+        if (!body) return;
+
+        // Ensure defaults are collapsed unless you want them open
+        syncBtn(btn, !body.hasAttribute("hidden") && body.style.display !== "none");
+
+        btn.addEventListener("click", () => {
+          const isHidden = body.hasAttribute("hidden");
+          if (isHidden) body.removeAttribute("hidden");
+          else body.setAttribute("hidden", "");
+
+          syncBtn(btn, isHidden);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
