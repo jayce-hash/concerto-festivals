@@ -538,6 +538,10 @@ const aiBtn = document.getElementById("aiBtn");
 aiBtn.href = "#";
 aiBtn.style.pointerEvents = "auto";
 aiBtn.style.opacity = "1";
+aiBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  openAiModal(f);
+});
 
 const modal = document.getElementById("aiModal");
 const closeEls = modal?.querySelectorAll("[data-close]");
@@ -625,6 +629,99 @@ genBtn?.addEventListener("click", async ()=>{
 
   // NEW: wire up Arrival/Essentials show/hide buttons
   initSectionToggles();
+}
+
+function openAiModal(festival){
+  const modal = document.getElementById("aiModal");
+  if(!modal) return;
+
+  const vibe = document.getElementById("aiVibe");
+  const budget = document.getElementById("aiBudget");
+  const mustSee = document.getElementById("aiMustSee");
+  const result = document.getElementById("aiResult");
+  const cancelBtn = document.getElementById("aiCancel");
+  const genBtn = document.getElementById("aiGenerate");
+
+  result.innerHTML = "";
+
+  const close = ()=>{
+    modal.hidden = true;
+  };
+
+  modal.hidden = false;
+
+  // Close interactions
+  modal.querySelectorAll("[data-close]").forEach(el=>{
+    el.addEventListener("click", close, { once:true });
+  });
+  cancelBtn?.addEventListener("click", close, { once:true });
+
+  genBtn?.addEventListener("click", async ()=>{
+    const userPrefs = {
+      vibe: vibe?.value?.trim() || "",
+      budget: budget?.value?.trim() || "",
+      mustSee: (mustSee?.value || "").split(",").map(s=>s.trim()).filter(Boolean)
+    };
+
+    genBtn.disabled = true;
+    genBtn.textContent = "Generating…";
+    result.innerHTML = `<div class="muted">Working…</div>`;
+
+    try{
+      const payload = {
+        festival: {
+          id: festival.id,
+          name: festival.name,
+          city: festival.city,
+          state: festival.state,
+          country: festival.country,
+          venue: festival.venue,
+          startDate: festival.startDate,
+          endDate: festival.endDate,
+          genres: festival.genres,
+          hasCamping: festival.hasCamping,
+          lineup: festival.lineup || null
+        },
+        userPrefs
+      };
+
+      const res = await fetch("/.netlify/functions/ai-plan", {
+        method:"POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if(!res.ok){
+        const t = await res.text();
+        throw new Error(t || "Request failed");
+      }
+
+      const data = await res.json();
+      const text = data?.text || "No response.";
+
+      result.innerHTML = `<div class="note" style="margin-top:12px">
+        <div class="note-title">Your plan</div>
+        <div class="note-sub" style="white-space:pre-wrap;margin-top:8px">${escapeHtml(text)}</div>
+      </div>`;
+    } catch(err){
+      result.innerHTML = `<div class="note" style="margin-top:12px">
+        <div class="note-title">Couldn’t generate</div>
+        <div class="note-sub">${escapeHtml(String(err.message || err))}</div>
+      </div>`;
+    } finally{
+      genBtn.disabled = false;
+      genBtn.textContent = "Generate";
+    }
+  }, { once:false });
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 init().catch(console.error);
