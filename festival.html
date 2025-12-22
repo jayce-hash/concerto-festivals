@@ -165,29 +165,46 @@
     </section>
   </main>
 
-    <!-- AI Planner Modal -->
-  <div class="modal" id="aiModal" hidden>
-    <div class="modal-backdrop" data-close="1"></div>
+<!-- AI Planner Modal -->
+<div class="modal" id="aiModal" hidden>
+  <div class="modal-backdrop" data-close="ai"></div>
 
-    <div class="modal-card">
-      <div class="modal-title">Plan with AI</div>
-
-      <div class="modal-body">
-        <div style="display:grid;gap:10px;margin-top:10px">
-          <input id="aiVibe" class="select" placeholder="Vibe (chill, rage, foodie, etc.)" />
-          <input id="aiBudget" class="select" placeholder="Budget (low / mid / high)" />
-          <input id="aiMustSee" class="select" placeholder="Must-see artists (comma-separated)" />
-        </div>
-
-        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px">
-          <button class="ghost-btn" id="aiCancel" type="button">Cancel</button>
-          <button class="primary-btn" id="aiGenerate" type="button">Generate</button>
-        </div>
-
-        <div id="aiResult" style="margin-top:14px"></div>
+  <div class="modal-card modal-card--wide" role="dialog" aria-modal="true" aria-labelledby="aiTitle">
+    <div class="modal-top">
+      <div>
+        <div class="kicker">PLAN WITH AI</div>
+        <div class="modal-title" id="aiTitle">Your Day Plan</div>
       </div>
+      <button class="icon-x" type="button" data-close="ai" aria-label="Close">×</button>
+    </div>
+
+    <div class="ai-grid">
+      <label class="ai-field">
+        <div class="ai-label">Day</div>
+        <select class="ai-select" id="aiDay"></select>
+      </label>
+
+      <label class="ai-field ai-field--full">
+        <div class="ai-label">What are you going for?</div>
+        <input class="ai-input" id="aiPrompt" placeholder="ex: EDM-heavy, avoid conflicts, see headliner, chill breaks, low walking" />
+      </label>
+    </div>
+
+    <div class="ai-actions">
+      <button class="pill-btn" type="button" id="aiUseSaved">Use my saved sets</button>
+      <button class="primary-btn" type="button" id="aiGenerate">Generate plan</button>
+    </div>
+
+    <div class="ai-result" id="aiResult" hidden>
+      <div class="ai-result-title" id="aiResultTitle"></div>
+      <div class="ai-result-body" id="aiResultBody"></div>
+    </div>
+
+    <div class="ai-foot">
+      <div class="muted">Tip: save sets (★) in the lineup first, then hit “Use my saved sets”.</div>
     </div>
   </div>
+</div>
 
   <script src="assets/js/festival.js"></script>
 </body>
