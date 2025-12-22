@@ -631,97 +631,151 @@ genBtn?.addEventListener("click", async ()=>{
   initSectionToggles();
 }
 
-function openAiModal(festival){
+function openAiModal(f){
   const modal = document.getElementById("aiModal");
-  if(!modal) return;
-
-  const vibe = document.getElementById("aiVibe");
-  const budget = document.getElementById("aiBudget");
-  const mustSee = document.getElementById("aiMustSee");
-  const result = document.getElementById("aiResult");
-  const cancelBtn = document.getElementById("aiCancel");
+  const daySel = document.getElementById("aiDay");
+  const promptEl = document.getElementById("aiPrompt");
+  const useSavedBtn = document.getElementById("aiUseSaved");
   const genBtn = document.getElementById("aiGenerate");
+  const resultWrap = document.getElementById("aiResult");
+  const resultTitle = document.getElementById("aiResultTitle");
+  const resultBody = document.getElementById("aiResultBody");
 
-  result.innerHTML = "";
+  if(!modal || !daySel || !promptEl || !useSavedBtn || !genBtn) return;
 
+  // Build day options from lineup keys if present
+  const keys = normalizeLineupKeys(f.lineup || {});
+  daySel.innerHTML = "";
+  if(keys.length){
+    keys.forEach(k=>{
+      const opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = isISODateKey(k) ? humanDateLabel(k) : k.toUpperCase();
+      daySel.appendChild(opt);
+    });
+  } else {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = "No lineup loaded";
+    daySel.appendChild(opt);
+  }
+
+  // Reset UI
+  promptEl.value = "";
+  resultWrap.hidden = true;
+  resultTitle.textContent = "";
+  resultBody.innerHTML = "";
+
+  // Open modal
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+
+  // Close helpers
   const close = ()=>{
     modal.hidden = true;
+    document.body.style.overflow = "";
+  };
+  modal.querySelectorAll('[data-close="ai"]').forEach(el=>{
+    el.onclick = close;
+  });
+  document.addEventListener("keydown", function esc(e){
+    if(e.key === "Escape" && !modal.hidden){
+      close();
+      document.removeEventListener("keydown", esc);
+    }
+  });
+
+  // Saved sets helper (pulls from the same localStorage save system you already use)
+  const SAVE_KEY = `concerto_fest_saved_${f.id}`;
+  const loadSaved = ()=>{
+    try { return new Set(JSON.parse(localStorage.getItem(SAVE_KEY) || "[]")); }
+    catch { return new Set(); }
   };
 
-  modal.hidden = false;
+  let savedSetsPayload = null;
 
-  // Close interactions
-  modal.querySelectorAll("[data-close]").forEach(el=>{
-    el.addEventListener("click", close, { once:true });
-  });
-  cancelBtn?.addEventListener("click", close, { once:true });
+  useSavedBtn.onclick = ()=>{
+    const saved = loadSaved();
+    savedSetsPayload = [...saved];
+    // Tiny UX feedback
+    useSavedBtn.textContent = savedSetsPayload.length ? `Using ${savedSetsPayload.length} saved` : "No saved sets";
+    setTimeout(()=> useSavedBtn.textContent = "Use my saved sets", 1400);
+  };
 
-  genBtn?.addEventListener("click", async ()=>{
-    const userPrefs = {
-      vibe: vibe?.value?.trim() || "",
-      budget: budget?.value?.trim() || "",
-      mustSee: (mustSee?.value || "").split(",").map(s=>s.trim()).filter(Boolean)
-    };
+  genBtn.onclick = async ()=>{
+    if(!keys.length){
+      resultWrap.hidden = false;
+      resultTitle.textContent = "No lineup yet";
+      resultBody.textContent = "Add lineup data to this festival first, then AI can build a real schedule.";
+      return;
+    }
 
-    genBtn.disabled = true;
     genBtn.textContent = "Generating…";
-    result.innerHTML = `<div class="muted">Working…</div>`;
+    genBtn.disabled = true;
+    resultWrap.hidden = true;
 
     try{
       const payload = {
         festival: {
-          id: festival.id,
-          name: festival.name,
-          city: festival.city,
-          state: festival.state,
-          country: festival.country,
-          venue: festival.venue,
-          startDate: festival.startDate,
-          endDate: festival.endDate,
-          genres: festival.genres,
-          hasCamping: festival.hasCamping,
-          lineup: festival.lineup || null
+          id: f.id,
+          name: f.name,
+          city: f.city,
+          state: f.state,
+          venue: f.venue,
+          startDate: f.startDate,
+          endDate: f.endDate,
+          hasCamping: f.hasCamping
         },
-        userPrefs
+        day: daySel.value,
+        prompt: promptEl.value.trim(),
+        lineup: f.lineup ? { [daySel.value]: f.lineup[daySel.value] } : null,
+        savedSets: savedSetsPayload
       };
 
-      const res = await fetch("/.netlify/functions/ai-plan", {
+      const res = await fetch("/.netlify/functions/plan", {
         method:"POST",
-        headers: { "Content-Type":"application/json" },
+        headers:{ "Content-Type":"application/json" },
         body: JSON.stringify(payload)
       });
 
-      if(!res.ok){
-        const t = await res.text();
-        throw new Error(t || "Request failed");
+      const data = await res.json();
+
+      // data.text might be JSON text depending on how your function returns it
+      let out = data?.text || "";
+      let obj = null;
+      try { obj = JSON.parse(out); } catch { /* keep as text */ }
+
+      resultWrap.hidden = false;
+
+      if(obj){
+        resultTitle.textContent = obj.dayPlanTitle || "Your plan";
+        const schedule = (obj.schedule || []).map(x=> `
+          <div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)">
+            <div style="min-width:78px;opacity:.8">${x.time || ""}</div>
+            <div><b>${x.title || ""}</b><div style="opacity:.8">${x.details || ""}</div></div>
+          </div>
+        `).join("");
+
+        const tips = (obj.tips || []).map(t=> `<li>${t}</li>`).join("");
+
+        resultBody.innerHTML = `
+          ${schedule || ""}
+          ${tips ? `<div style="margin-top:10px"><div class="kicker">Tips</div><ul style="margin:8px 0 0;padding-left:18px">${tips}</ul></div>` : ""}
+        `;
+      } else {
+        resultTitle.textContent = "Your plan";
+        resultBody.textContent = out || "No response.";
       }
 
-      const data = await res.json();
-      const text = data?.text || "No response.";
-
-      result.innerHTML = `<div class="note" style="margin-top:12px">
-        <div class="note-title">Your plan</div>
-        <div class="note-sub" style="white-space:pre-wrap;margin-top:8px">${escapeHtml(text)}</div>
-      </div>`;
     } catch(err){
-      result.innerHTML = `<div class="note" style="margin-top:12px">
-        <div class="note-title">Couldn’t generate</div>
-        <div class="note-sub">${escapeHtml(String(err.message || err))}</div>
-      </div>`;
-    } finally{
+      resultWrap.hidden = false;
+      resultTitle.textContent = "Couldn’t generate";
+      resultBody.textContent = String(err);
+    } finally {
       genBtn.disabled = false;
-      genBtn.textContent = "Generate";
+      genBtn.textContent = "Generate plan";
     }
-  }, { once:false });
-}
-
-function escapeHtml(s){
-  return String(s)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  };
 }
 
 init().catch(console.error);
