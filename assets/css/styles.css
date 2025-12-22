@@ -634,3 +634,17 @@ body.fest-dark .empty{
 
 body.fest-dark .empty-title{ color: var(--ink) !important; }
 body.fest-dark .empty-sub{ color: var(--muted) !important; }
+
+#aiResult .ai-block{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  margin-top:10px;
+  background:rgba(255,255,255,.04);
+}
+#aiResult .ai-h{
+  font-weight:600;
+  margin:0 0 8px;
+}
+#aiResult ul{ margin:0; padding-left:18px; }
+#aiResult li{ margin:6px 0; line-height:1.35; }
