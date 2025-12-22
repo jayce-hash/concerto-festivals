@@ -574,3 +574,37 @@ body.fest-dark .search-row input[type="radio"] {
   border-color: var(--line);
   color: var(--ink);
 }
+
+/* =========================
+   FESTIVALS — "How it works" modal contrast fix
+   ========================= */
+
+body.fest-dark .modal-card{
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+
+body.fest-dark .modal-title{
+  color: var(--ink) !important;
+}
+
+body.fest-dark .modal-body,
+body.fest-dark .modal-card p,
+body.fest-dark .modal-card li{
+  color: var(--muted) !important;
+}
+
+/* Make backdrop feel correct in dark mode */
+body.fest-dark .modal-backdrop{
+  background: rgba(0,0,0,.55) !important;
+}
+
+/* Button in modal */
+body.fest-dark .modal-card .primary-btn,
+body.fest-dark .modal-card .pill-btn,
+body.fest-dark .modal-card .ghost-btn{
+  background: rgba(255,255,255,0.06);
+  border-color: var(--line);
+  color: var(--ink);
+}
