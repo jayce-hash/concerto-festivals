@@ -667,16 +667,16 @@ async function init(){
     }
   }
 
-  // Plan with AI button
+    // Plan with AI button (single bind)
   const aiBtn = document.getElementById("aiBtn");
-  if(aiBtn){
+  if (aiBtn) {
     aiBtn.href = "#";
     aiBtn.style.pointerEvents = "auto";
     aiBtn.style.opacity = "1";
-    aiBtn.addEventListener("click", (e)=>{
+    aiBtn.onclick = (e) => {
       e.preventDefault();
       openAiModal(f);
-    });
+    };
   }
 
   // Render page sections
