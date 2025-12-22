@@ -615,3 +615,33 @@ body.fest-dark .slot{ border-bottom-color: rgba(255,255,255,.08); }
 .lineup-day[data-day="__myday__"] .slot .artist span{
   color: var(--muted);
 }
+
+/* Collapsible section toggles */
+.section-head--row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.section-toggle{
+  margin-top:2px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--ink);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+body.fest-dark .section-toggle{
+  background:rgba(255,255,255,.06);
+  border-color:var(--line);
+  color:var(--ink);
+}
+
+.collapse{
+  display:none !important;
+}
