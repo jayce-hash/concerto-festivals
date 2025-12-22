@@ -554,3 +554,64 @@ body.fest-dark .slot{ border-bottom-color: rgba(255,255,255,.08); }
   color:var(--muted);
   white-space:nowrap;
 }
+
+/* =========================
+   Schedule: right-side star layout (clean)
+   ========================= */
+
+/* Override the old "space-between" so we can right-align meta reliably */
+.stage-body .slot{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start; /* was space-between */
+  gap:10px;
+}
+
+/* Keep time tight + fixed width so artists line up */
+.stage-body .slot .time{
+  flex:0 0 auto;
+  min-width:74px;            /* tweak if you want tighter */
+  text-align:left;
+  white-space:nowrap;
+}
+
+/* Artist takes remaining space */
+.stage-body .slot .artist{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+/* Meta stays pinned right */
+.stage-body .slot .meta{
+  flex:0 0 auto;
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* Star button polish */
+.stage-body .star-btn{
+  width:30px;
+  height:30px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.06);
+  cursor:pointer;
+  user-select:none;
+  font-size:16px;
+  line-height:1;
+}
+
+/* Stronger "saved" look */
+.stage-body .star-btn[aria-pressed="true"]{
+  border-color: rgba(255,255,255,0.55);
+}
+
+/* Make the My Day rows look consistent too */
+.lineup-day[data-day="__myday__"] .slot .artist span{
+  color: var(--muted);
+}
