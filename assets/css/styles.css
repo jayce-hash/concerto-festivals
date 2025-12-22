@@ -353,6 +353,9 @@ a{color:inherit;text-decoration:none}
   margin: 6px 0 12px;
 }
 
+#lineupSection{ margin-top: 14px; }
+.lineup-footnote{ margin-top: 8px; }
+
 .lineup-tab{
   border:1px solid var(--line);
   background:#fff;
@@ -644,4 +647,39 @@ body.fest-dark .section-toggle{
 
 .collapse{
   display:none !important;
+}
+
+/* =========================
+   Festival Section Cards (consistent surfaces)
+   ========================= */
+.section-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow2);
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.section-card .section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 14px 16px;
+  margin:0; /* override your old margin */
+  border-bottom: 1px solid var(--line);
+}
+
+.section-card .section-head-left{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.section-card .section-title{ font-weight:600; }
+.section-card .section-sub{ color: var(--muted); font-size:13px; line-height:1.35; }
+
+.section-body{
+  padding: 14px 16px;
 }
