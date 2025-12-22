@@ -6,7 +6,7 @@ function qs(name){
 }
 
 function parseDateISO(s){
-  const [y,m,d] = s.split("-").map(Number);
+  const [y,m,d] = String(s || "").split("-").map(Number);
   return new Date(y, (m-1), d);
 }
 
@@ -72,7 +72,6 @@ function renderArrival(f){
     warnEl.innerHTML = warnings.map(t => `<li>${t}</li>`).join("");
   }
 
-  // Camping card: show only if festival supports camping
   const campingCard = document.getElementById("arrivalCampingCard");
   const campingEl = document.getElementById("arrivalCamping");
   if(campingCard && campingEl){
@@ -88,7 +87,7 @@ function renderArrival(f){
 }
 
 /* =========================
-   2) Essentials (defaults + optional overrides)
+   2) Essentials
    ========================= */
 
 const DEFAULT_ESSENTIALS = {
@@ -125,14 +124,12 @@ function setList(el, items){
 
 function renderEssentials(f){
   const e = f.essentials || {};
-
   const base = e.base || DEFAULT_ESSENTIALS.base;
   const weather = e.weather || DEFAULT_ESSENTIALS.weather;
 
   setList(document.getElementById("essBase"), base);
   setList(document.getElementById("essWeather"), weather);
 
-  // Camping list conditional
   const campingCard = document.getElementById("essCampingCard");
   const campingEl = document.getElementById("essCamping");
   if(campingCard && campingEl){
@@ -146,7 +143,6 @@ function renderEssentials(f){
     }
   }
 
-  // Notes optional
   const notesCard = document.getElementById("essNotesCard");
   const notesEl = document.getElementById("essNotes");
   if(notesCard && notesEl){
@@ -157,11 +153,7 @@ function renderEssentials(f){
 }
 
 /* =========================
-   3) Daily Lineup + Stars + My Day
-   Supports lineup keyed by:
-   - ISO dates: { "2026-04-10": { "Main Stage": [...] } }
-   - or day1/day2: { "day1": { ... } }
-   Slot format: { artist: "", time: "" }
+   3) Daily Lineup
    ========================= */
 
 function isISODateKey(k){
@@ -188,28 +180,21 @@ function normalizeLineupKeys(lineupObj){
 
   const dayKeys = keys
     .filter(k => /^day\d+$/i.test(k))
-    .sort((a,b)=> {
-      const na = Number(a.replace(/day/i,""));
-      const nb = Number(b.replace(/day/i,""));
-      return na - nb;
-    });
+    .sort((a,b)=> Number(a.replace(/day/i,"")) - Number(b.replace(/day/i,"")));
 
   return dayKeys.length ? dayKeys : keys.sort();
 }
 
 function parseTimeToMinutes(t){
-  // Supports "6:45 PM" / "6 PM" / "18:45"
   if(!t) return null;
   const s = String(t).trim();
 
-  // 24h "18:45"
   const m24 = s.match(/^(\d{1,2}):(\d{2})$/);
   if(m24){
     const hh = Number(m24[1]), mm = Number(m24[2]);
     if(Number.isFinite(hh) && Number.isFinite(mm)) return hh*60+mm;
   }
 
-  // 12h "6:45 PM" or "6 PM"
   const m12 = s.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
   if(m12){
     let hh = Number(m12[1]);
@@ -256,7 +241,6 @@ function renderLineup(f){
 
   const saved = loadSaved();
 
-  // Build My Day list from current lineup (only saved entries that still exist)
   const allSlots = [];
   dayKeys.forEach((dayKey, dayIndex)=>{
     const stages = lineup[dayKey] || {};
@@ -289,7 +273,6 @@ function renderLineup(f){
 
   const showMyDay = myDayItems.length > 0;
 
-  // Tabs: day tabs + My Day
   const tabModels = [
     ...dayKeys.map((k)=>({
       key: k,
@@ -302,7 +285,6 @@ function renderLineup(f){
     return `<button class="lineup-tab" data-day="${t.key}" aria-selected="${idx===0 ? "true":"false"}">${t.label}</button>`;
   }).join("");
 
-  // Day panels
   const dayPanelsHTML = dayKeys.map((dayKey, idx) => {
     const stages = lineup[dayKey] || {};
     const stageNames = Object.keys(stages);
@@ -348,7 +330,6 @@ function renderLineup(f){
     return `<div class="lineup-day ${idx===0 ? "active":""}" data-day="${dayKey}">${fallback}</div>`;
   }).join("");
 
-  // My Day panel
   const myDayHTML = showMyDay ? `
     <div class="lineup-day" data-day="__myday__">
       <div class="stage" style="margin-bottom:10px">
@@ -373,7 +354,6 @@ function renderLineup(f){
 
   daysEl.innerHTML = dayPanelsHTML + myDayHTML;
 
-  // Tab interactions
   const setActiveDay = (key)=>{
     tabsEl.querySelectorAll(".lineup-tab").forEach(btn=>{
       btn.setAttribute("aria-selected", btn.dataset.day === key ? "true" : "false");
@@ -387,7 +367,6 @@ function renderLineup(f){
     btn.addEventListener("click", ()=> setActiveDay(btn.dataset.day));
   });
 
-  // Stage collapse/expand (day panels only)
   daysEl.querySelectorAll(".lineup-day").forEach(dayPanel=>{
     if(dayPanel.dataset.day === "__myday__") return;
 
@@ -412,7 +391,6 @@ function renderLineup(f){
     });
   });
 
-  // Star click (bind once)
   if(!daysEl.dataset.starBound){
     daysEl.dataset.starBound = "true";
     daysEl.addEventListener("click", (e)=>{
@@ -428,21 +406,16 @@ function renderLineup(f){
       else current.add(key);
       saveSaved(current);
 
-      // Re-render lineup to update stars + My Day tab
       renderLineup(f);
 
-      // Keep user on My Day if they were on it
       const activeTab = tabsEl.querySelector('.lineup-tab[aria-selected="true"]')?.dataset?.day;
-      if(activeTab === "__myday__"){
-        setActiveDay("__myday__");
-      }
+      if(activeTab === "__myday__") setActiveDay("__myday__");
     });
   }
 }
 
 /* =========================
    Section Toggles (Arrival / Essentials)
-   Uses: button[data-toggle="#someId"]
    ========================= */
 function initSectionToggles(){
   document.querySelectorAll("[data-toggle]").forEach(btn=>{
@@ -452,8 +425,7 @@ function initSectionToggles(){
     const target = document.querySelector(sel);
     if(!target) return;
 
-    // Default: expanded unless aria-expanded="false"
-    const expanded = btn.getAttribute("aria-expanded") !== "false";
+    const expanded = btn.getAttribute("aria-expanded") === "true";
     target.hidden = !expanded;
     btn.textContent = expanded ? "Hide" : "Show";
 
@@ -465,6 +437,162 @@ function initSectionToggles(){
       btn.textContent = nowExpanded ? "Hide" : "Show";
     });
   });
+}
+
+/* =========================
+   AI Modal (single flow)
+   Calls: /.netlify/functions/plan
+   Expects: { ok:true, plan:{...} }
+   ========================= */
+
+function openAiModal(f){
+  const modal = document.getElementById("aiModal");
+  const daySel = document.getElementById("aiDay");
+  const promptEl = document.getElementById("aiPrompt");
+  const useSavedBtn = document.getElementById("aiUseSaved");
+  const genBtn = document.getElementById("aiGenerate");
+  const resultWrap = document.getElementById("aiResult");
+  const resultTitle = document.getElementById("aiResultTitle");
+  const resultBody = document.getElementById("aiResultBody");
+
+  if(!modal || !daySel || !promptEl || !useSavedBtn || !genBtn || !resultWrap || !resultTitle || !resultBody){
+    console.warn("AI modal elements missing. Check festival.html IDs.");
+    return;
+  }
+
+  const keys = normalizeLineupKeys(f.lineup || {});
+  daySel.innerHTML = "";
+
+  if(keys.length){
+    keys.forEach(k=>{
+      const opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = isISODateKey(k) ? humanDateLabel(k) : k.toUpperCase();
+      daySel.appendChild(opt);
+    });
+  } else {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = "No lineup loaded";
+    daySel.appendChild(opt);
+  }
+
+  promptEl.value = "";
+  resultWrap.hidden = true;
+  resultTitle.textContent = "";
+  resultBody.innerHTML = "";
+
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+
+  const close = ()=>{
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  };
+
+  modal.querySelectorAll('[data-close="ai"]').forEach(el=>{
+    el.onclick = close;
+  });
+
+  document.addEventListener("keydown", function esc(e){
+    if(e.key === "Escape" && !modal.hidden){
+      close();
+      document.removeEventListener("keydown", esc);
+    }
+  });
+
+  const SAVE_KEY = `concerto_fest_saved_${f.id}`;
+  const loadSaved = ()=>{
+    try { return new Set(JSON.parse(localStorage.getItem(SAVE_KEY) || "[]")); }
+    catch { return new Set(); }
+  };
+
+  let savedSetsPayload = null;
+
+  useSavedBtn.onclick = ()=>{
+    const saved = loadSaved();
+    savedSetsPayload = [...saved];
+    useSavedBtn.textContent = savedSetsPayload.length ? `Using ${savedSetsPayload.length} saved` : "No saved sets";
+    setTimeout(()=> useSavedBtn.textContent = "Use my saved sets", 1400);
+  };
+
+  genBtn.onclick = async ()=>{
+    if(!keys.length){
+      resultWrap.hidden = false;
+      resultTitle.textContent = "No lineup yet";
+      resultBody.textContent = "Add lineup data to this festival first, then AI can build a real schedule.";
+      return;
+    }
+
+    genBtn.textContent = "Generating…";
+    genBtn.disabled = true;
+    resultWrap.hidden = true;
+
+    try{
+      const payload = {
+        festival: {
+          id: f.id,
+          name: f.name,
+          city: f.city,
+          state: f.state,
+          country: f.country,
+          venue: f.venue,
+          startDate: f.startDate,
+          endDate: f.endDate,
+          genres: f.genres,
+          hasCamping: f.hasCamping
+        },
+        day: daySel.value,
+        prompt: promptEl.value.trim(),
+        lineup: f.lineup ? { [daySel.value]: f.lineup[daySel.value] } : null,
+        savedSets: savedSetsPayload
+      };
+
+      const res = await fetch("/.netlify/functions/plan", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json().catch(async ()=>{
+        const t = await res.text();
+        return { ok:false, error:t };
+      });
+
+      if(!res.ok || !data?.ok){
+        resultWrap.hidden = false;
+        resultTitle.textContent = "Error";
+        resultBody.textContent = data?.error || JSON.stringify(data);
+        return;
+      }
+
+      const obj = data.plan || {};
+      resultWrap.hidden = false;
+      resultTitle.textContent = obj.dayPlanTitle || "Your plan";
+
+      const schedule = (obj.schedule || []).map(x=> `
+        <div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)">
+          <div style="min-width:78px;opacity:.8">${x.time || ""}</div>
+          <div><b>${x.title || ""}</b><div style="opacity:.8">${x.details || ""}</div></div>
+        </div>
+      `).join("");
+
+      const tips = (obj.tips || []).map(t=> `<li>${t}</li>`).join("");
+
+      resultBody.innerHTML = `
+        ${schedule || ""}
+        ${tips ? `<div style="margin-top:10px"><div class="kicker">Tips</div><ul style="margin:8px 0 0;padding-left:18px">${tips}</ul></div>` : ""}
+      `;
+
+    } catch(err){
+      resultWrap.hidden = false;
+      resultTitle.textContent = "Couldn’t generate";
+      resultBody.textContent = String(err);
+    } finally {
+      genBtn.disabled = false;
+      genBtn.textContent = "Generate plan";
+    }
+  };
 }
 
 /* =========================
@@ -504,278 +632,58 @@ async function init(){
   document.getElementById("campVal").textContent = f.hasCamping ? "Yes" : "No";
 
   const officialBtn = document.getElementById("officialBtn");
-  officialBtn.href = f.officialUrl || f.ticketUrl || "#";
-  officialBtn.style.pointerEvents = (officialBtn.href === "#") ? "none" : "auto";
-  officialBtn.style.opacity = (officialBtn.href === "#") ? "0.5" : "1";
+  if(officialBtn){
+    officialBtn.href = f.officialUrl || f.ticketUrl || "#";
+    officialBtn.style.pointerEvents = (officialBtn.href === "#") ? "none" : "auto";
+    officialBtn.style.opacity = (officialBtn.href === "#") ? "0.5" : "1";
+  }
 
   const ticketsBtn = document.getElementById("ticketsBtn");
-  ticketsBtn.href = f.ticketUrl || f.officialUrl || "#";
-  ticketsBtn.style.pointerEvents = (ticketsBtn.href === "#") ? "none" : "auto";
-  ticketsBtn.style.opacity = (ticketsBtn.href === "#") ? "0.5" : "1";
+  if(ticketsBtn){
+    ticketsBtn.href = f.ticketUrl || f.officialUrl || "#";
+    ticketsBtn.style.pointerEvents = (ticketsBtn.href === "#") ? "none" : "auto";
+    ticketsBtn.style.opacity = (ticketsBtn.href === "#") ? "0.5" : "1";
+  }
 
-  // City Guide link (canonical)
   const cityGuideBtn = document.getElementById("cityGuideBtn");
   const CITY_GUIDE_BASE = "https://concerto-venue-map.netlify.app/";
 
-  const lat = f.coordinates?.lat;
-  const lng = f.coordinates?.lng;
+  if(cityGuideBtn){
+    const lat = f.coordinates?.lat;
+    const lng = f.coordinates?.lng;
 
-  if (typeof lat === "number" && typeof lng === "number") {
-    cityGuideBtn.href = `${CITY_GUIDE_BASE}?lat=${lat}&lng=${lng}&venue=${encodeURIComponent(f.name)}`;
-    cityGuideBtn.style.pointerEvents = "auto";
-    cityGuideBtn.style.opacity = "1";
-  } else if (f.cityGuideVenueKey) {
-    cityGuideBtn.href = `${CITY_GUIDE_BASE}?venue=${encodeURIComponent(f.cityGuideVenueKey)}`;
-    cityGuideBtn.style.pointerEvents = "auto";
-    cityGuideBtn.style.opacity = "1";
-  } else {
-    cityGuideBtn.href = "#";
-    cityGuideBtn.style.pointerEvents = "none";
-    cityGuideBtn.style.opacity = "0.5";
+    if (typeof lat === "number" && typeof lng === "number") {
+      cityGuideBtn.href = `${CITY_GUIDE_BASE}?lat=${lat}&lng=${lng}&venue=${encodeURIComponent(f.name)}`;
+      cityGuideBtn.style.pointerEvents = "auto";
+      cityGuideBtn.style.opacity = "1";
+    } else if (f.cityGuideVenueKey) {
+      cityGuideBtn.href = `${CITY_GUIDE_BASE}?venue=${encodeURIComponent(f.cityGuideVenueKey)}`;
+      cityGuideBtn.style.pointerEvents = "auto";
+      cityGuideBtn.style.opacity = "1";
+    } else {
+      cityGuideBtn.href = "#";
+      cityGuideBtn.style.pointerEvents = "none";
+      cityGuideBtn.style.opacity = "0.5";
+    }
   }
 
-const aiBtn = document.getElementById("aiBtn");
-aiBtn.href = "#";
-aiBtn.style.pointerEvents = "auto";
-aiBtn.style.opacity = "1";
-aiBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  openAiModal(f);
-});
-
-const modal = document.getElementById("aiModal");
-const closeEls = modal?.querySelectorAll("[data-close]");
-const cancelBtn = document.getElementById("aiCancel");
-const genBtn = document.getElementById("aiGenerate");
-const resultEl = document.getElementById("aiResult");
-
-function openModal(){ modal.hidden = false; }
-function closeModal(){ modal.hidden = true; }
-
-aiBtn.addEventListener("click", (e)=>{
-  e.preventDefault();
-  openModal();
-});
-
-closeEls?.forEach(el => el.addEventListener("click", closeModal));
-cancelBtn?.addEventListener("click", closeModal);
-
-genBtn?.addEventListener("click", async ()=>{
-  resultEl.innerHTML = `<div class="muted">Generating…</div>`;
-
-  const prefs = {
-    vibe: document.getElementById("aiVibe")?.value || "",
-    budget: document.getElementById("aiBudget")?.value || "",
-    must_see: (document.getElementById("aiMustSee")?.value || "")
-      .split(",").map(s=>s.trim()).filter(Boolean)
-  };
-
-  const res = await fetch("/.netlify/functions/festival-plan", {
-    method: "POST",
-    headers: { "Content-Type":"application/json" },
-    body: JSON.stringify({ festival: f, prefs })
-  });
-
-  if(!res.ok){
-    const t = await res.text();
-    resultEl.innerHTML = `<div class="ai-block"><div class="ai-h">Error</div><div class="muted">${t}</div></div>`;
-    return;
+  // Plan with AI button
+  const aiBtn = document.getElementById("aiBtn");
+  if(aiBtn){
+    aiBtn.href = "#";
+    aiBtn.style.pointerEvents = "auto";
+    aiBtn.style.opacity = "1";
+    aiBtn.addEventListener("click", (e)=>{
+      e.preventDefault();
+      openAiModal(f);
+    });
   }
 
-  const plan = await res.json();
-
-  resultEl.innerHTML = `
-    <div class="ai-block">
-      <div class="ai-h">Summary</div>
-      <div class="muted">${plan.summary}</div>
-    </div>
-
-    <div class="ai-block">
-      <div class="ai-h">Arrival</div>
-      <ul>${plan.arrival.map(x=>`<li>${x}</li>`).join("")}</ul>
-    </div>
-
-    <div class="ai-block">
-      <div class="ai-h">Essentials</div>
-      <ul>${plan.essentials.map(x=>`<li>${x}</li>`).join("")}</ul>
-    </div>
-
-    <div class="ai-block">
-      <div class="ai-h">Daily Plan</div>
-      ${plan.daily_plan.map(d => `
-        <div style="margin-top:10px">
-          <div style="font-weight:600;margin-bottom:6px">${d.day_label}</div>
-          <ul>${d.timeline.map(t=>`<li><b>${t.time}</b> — ${t.title}: ${t.detail}</li>`).join("")}</ul>
-        </div>
-      `).join("")}
-    </div>
-
-    <div class="ai-block">
-      <div class="ai-h">Food + Afters</div>
-      <ul>${plan.food_and_afters.map(x=>`<li>${x}</li>`).join("")}</ul>
-    </div>
-
-    <div class="ai-block">
-      <div class="ai-h">Pro Tips</div>
-      <ul>${plan.pro_tips.map(x=>`<li>${x}</li>`).join("")}</ul>
-    </div>
-  `;
-});
-
-  // Guided Festival Layer
+  // Render page sections
   renderArrival(f);
   renderEssentials(f);
   renderLineup(f);
-
-  // NEW: wire up Arrival/Essentials show/hide buttons
   initSectionToggles();
-}
-
-function openAiModal(f){
-  const modal = document.getElementById("aiModal");
-  const daySel = document.getElementById("aiDay");
-  const promptEl = document.getElementById("aiPrompt");
-  const useSavedBtn = document.getElementById("aiUseSaved");
-  const genBtn = document.getElementById("aiGenerate");
-  const resultWrap = document.getElementById("aiResult");
-  const resultTitle = document.getElementById("aiResultTitle");
-  const resultBody = document.getElementById("aiResultBody");
-
-  if(!modal || !daySel || !promptEl || !useSavedBtn || !genBtn) return;
-
-  // Build day options from lineup keys if present
-  const keys = normalizeLineupKeys(f.lineup || {});
-  daySel.innerHTML = "";
-  if(keys.length){
-    keys.forEach(k=>{
-      const opt = document.createElement("option");
-      opt.value = k;
-      opt.textContent = isISODateKey(k) ? humanDateLabel(k) : k.toUpperCase();
-      daySel.appendChild(opt);
-    });
-  } else {
-    const opt = document.createElement("option");
-    opt.value = "";
-    opt.textContent = "No lineup loaded";
-    daySel.appendChild(opt);
-  }
-
-  // Reset UI
-  promptEl.value = "";
-  resultWrap.hidden = true;
-  resultTitle.textContent = "";
-  resultBody.innerHTML = "";
-
-  // Open modal
-  modal.hidden = false;
-  document.body.style.overflow = "hidden";
-
-  // Close helpers
-  const close = ()=>{
-    modal.hidden = true;
-    document.body.style.overflow = "";
-  };
-  modal.querySelectorAll('[data-close="ai"]').forEach(el=>{
-    el.onclick = close;
-  });
-  document.addEventListener("keydown", function esc(e){
-    if(e.key === "Escape" && !modal.hidden){
-      close();
-      document.removeEventListener("keydown", esc);
-    }
-  });
-
-  // Saved sets helper (pulls from the same localStorage save system you already use)
-  const SAVE_KEY = `concerto_fest_saved_${f.id}`;
-  const loadSaved = ()=>{
-    try { return new Set(JSON.parse(localStorage.getItem(SAVE_KEY) || "[]")); }
-    catch { return new Set(); }
-  };
-
-  let savedSetsPayload = null;
-
-  useSavedBtn.onclick = ()=>{
-    const saved = loadSaved();
-    savedSetsPayload = [...saved];
-    // Tiny UX feedback
-    useSavedBtn.textContent = savedSetsPayload.length ? `Using ${savedSetsPayload.length} saved` : "No saved sets";
-    setTimeout(()=> useSavedBtn.textContent = "Use my saved sets", 1400);
-  };
-
-  genBtn.onclick = async ()=>{
-    if(!keys.length){
-      resultWrap.hidden = false;
-      resultTitle.textContent = "No lineup yet";
-      resultBody.textContent = "Add lineup data to this festival first, then AI can build a real schedule.";
-      return;
-    }
-
-    genBtn.textContent = "Generating…";
-    genBtn.disabled = true;
-    resultWrap.hidden = true;
-
-    try{
-      const payload = {
-        festival: {
-          id: f.id,
-          name: f.name,
-          city: f.city,
-          state: f.state,
-          venue: f.venue,
-          startDate: f.startDate,
-          endDate: f.endDate,
-          hasCamping: f.hasCamping
-        },
-        day: daySel.value,
-        prompt: promptEl.value.trim(),
-        lineup: f.lineup ? { [daySel.value]: f.lineup[daySel.value] } : null,
-        savedSets: savedSetsPayload
-      };
-
-      const res = await fetch("/.netlify/functions/plan", {
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-
-      // data.text might be JSON text depending on how your function returns it
-      let out = data?.text || "";
-      let obj = null;
-      try { obj = JSON.parse(out); } catch { /* keep as text */ }
-
-      resultWrap.hidden = false;
-
-      if(obj){
-        resultTitle.textContent = obj.dayPlanTitle || "Your plan";
-        const schedule = (obj.schedule || []).map(x=> `
-          <div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)">
-            <div style="min-width:78px;opacity:.8">${x.time || ""}</div>
-            <div><b>${x.title || ""}</b><div style="opacity:.8">${x.details || ""}</div></div>
-          </div>
-        `).join("");
-
-        const tips = (obj.tips || []).map(t=> `<li>${t}</li>`).join("");
-
-        resultBody.innerHTML = `
-          ${schedule || ""}
-          ${tips ? `<div style="margin-top:10px"><div class="kicker">Tips</div><ul style="margin:8px 0 0;padding-left:18px">${tips}</ul></div>` : ""}
-        `;
-      } else {
-        resultTitle.textContent = "Your plan";
-        resultBody.textContent = out || "No response.";
-      }
-
-    } catch(err){
-      resultWrap.hidden = false;
-      resultTitle.textContent = "Couldn’t generate";
-      resultBody.textContent = String(err);
-    } finally {
-      genBtn.disabled = false;
-      genBtn.textContent = "Generate plan";
-    }
-  };
 }
 
 init().catch(console.error);
