@@ -249,7 +249,7 @@ a{color:inherit;text-decoration:none}
    FESTIVALS (Festival page only)
    ========================= */
 
-/* Full dark mode variables (festival pages) */
+/* Dark mode variables (kept, but only apply if you re-add body.fest-dark) */
 body.fest-dark{
   --bg:#0E1830;
   --ink:#F8F9F9;
@@ -302,7 +302,7 @@ body.fest-dark .primary-btn{
    Section cards (Daily Lineup, Arrival, Essentials)
    ========================= */
 .section-card{
-  background: rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: var(--shadow2);
@@ -331,7 +331,7 @@ body.fest-dark .primary-btn{
 .section-toggle{
   margin-top:2px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
   color:var(--ink);
   border-radius:999px;
   padding:8px 12px;
@@ -354,7 +354,7 @@ body.fest-dark .primary-btn{
 
 .lineup-tab{
   border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
   border-radius:999px;
   padding:8px 12px;
   font-size:13px;
@@ -362,7 +362,7 @@ body.fest-dark .primary-btn{
   color:var(--ink);
 }
 .lineup-tab[aria-selected="true"]{
-  border-color:rgba(255,255,255,.55);
+  border-color: var(--accent); /* UPDATED */
 }
 
 .lineup-day{ display:none; }
@@ -371,7 +371,7 @@ body.fest-dark .primary-btn{
 .stage{
   border:1px solid var(--line);
   border-radius:16px;
-  background:rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
   margin-bottom:10px;
   overflow:hidden;
 }
@@ -399,7 +399,7 @@ body.fest-dark .primary-btn{
   justify-content:flex-start;
   gap:10px;
   padding:8px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(18,30,54,.08); /* UPDATED (was white alpha) */
 }
 .stage-body .slot:last-child{ border-bottom:none; }
 
@@ -429,14 +429,14 @@ body.fest-dark .primary-btn{
   display:inline-flex;align-items:center;justify-content:center;
   border-radius:999px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,0.06);
+  background: var(--card); /* UPDATED */
   cursor:pointer;
   user-select:none;
   font-size:16px;
   line-height:1;
 }
 .star-btn[aria-pressed="true"]{
-  border-color: rgba(255,255,255,0.55);
+  border-color: var(--accent); /* UPDATED */
 }
 
 .lineup-footnote{
@@ -447,50 +447,51 @@ body.fest-dark .primary-btn{
 
 /* =========================
    Arrival & Essentials inner grids
-   (These sit inside the section-card body)
    ========================= */
-
-/* Arrival (dark card inside) */
 .arrival-grid{
   display:grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
   gap:10px;
 }
+
 .arrival-card{
-  background:rgba(0,0,0,.12);
-  border:1px solid rgba(255,255,255,0.10);
+  background: var(--card);         /* UPDATED */
+  border:1px solid var(--line);    /* UPDATED */
   border-radius:16px;
   padding:12px;
 }
+
 .arrival-label{
   font-size:11px;
   letter-spacing:.14em;
-  color: rgba(248,249,249,0.6);
+  color: var(--muted);             /* UPDATED */
   text-transform:uppercase;
 }
+
 .arrival-rows{
   margin-top:10px;
   display:flex;
   flex-direction:column;
   gap:8px;
 }
+
 .arrival-row{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
   padding:10px;
-  border:1px solid rgba(255,255,255,0.10);
+  border:1px solid var(--line);             /* UPDATED */
   border-radius:14px;
-  background:rgba(0,0,0,.18);
+  background: rgba(18,30,54,.03);           /* UPDATED */
 }
-.arrival-row b{ color:#F8F9F9; font-weight:600; }
-.arrival-row span{ color: rgba(248,249,249,0.75); font-size:13px; line-height:1.35; }
+.arrival-row b{ color: var(--ink); font-weight:600; }     /* UPDATED */
+.arrival-row span{ color: var(--muted); font-size:13px; line-height:1.35; } /* UPDATED */
 
 .arrival-list{
   margin:10px 0 0;
   padding-left:18px;
-  color: rgba(248,249,249,0.8);
+  color: var(--ink);                         /* UPDATED */
 }
 .arrival-list li{ margin:8px 0; line-height:1.4; }
 
@@ -502,22 +503,25 @@ body.fest-dark .primary-btn{
   grid-template-columns: repeat(2, minmax(0,1fr));
   gap:10px;
 }
+
 .ess-card{
-  background:rgba(0,0,0,.12);
-  border:1px solid rgba(255,255,255,0.10);
+  background: var(--card);         /* UPDATED */
+  border:1px solid var(--line);    /* UPDATED */
   border-radius:16px;
   padding:12px;
 }
+
 .ess-label{
   font-size:11px;
   letter-spacing:.14em;
-  color: rgba(248,249,249,0.6);
+  color: var(--muted);             /* UPDATED */
   text-transform:uppercase;
 }
+
 .ess-list{
   margin:10px 0 0;
   padding-left:18px;
-  color: rgba(248,249,249,0.8);
+  color: var(--ink);               /* UPDATED */
 }
 .ess-list li{ margin:8px 0; line-height:1.4; }
 
@@ -531,7 +535,6 @@ body.fest-dark .primary-btn{
 /* =========================
    Festival list chips — dark mode fix
    ========================= */
-
 body.fest-dark .chip,
 body.fest-dark .tag,
 body.fest-dark .filter-pill,
@@ -541,31 +544,23 @@ body.fest-dark .genre-pill {
   border-color: rgba(255,255,255,0.18);
   color: rgba(248,249,249,0.85);
 }
-
-/* Hover / active (subtle, not white) */
 body.fest-dark .chip:hover,
 body.fest-dark .tag:hover {
   background: rgba(255,255,255,0.12);
 }
 
 /* =========================
-   FESTIVALS — Button polish fixes
+   FESTIVALS — Button polish fixes (dark mode only)
    ========================= */
-
-/* 1) Festival page action buttons should ALL match pill style */
 body.fest-dark .detail-actions .primary-btn {
   background: rgba(255,255,255,0.06);
   color: var(--ink);
   border-color: var(--line);
   box-shadow: none;
 }
-
-/* Optional: subtle hover */
 body.fest-dark .detail-actions .primary-btn:hover {
   background: rgba(255,255,255,0.10);
 }
-
-/* 2) Fix rogue white pill in festival search row */
 body.fest-dark .search-row .pill-btn,
 body.fest-dark .search-row button,
 body.fest-dark .search-row input[type="checkbox"],
@@ -576,31 +571,22 @@ body.fest-dark .search-row input[type="radio"] {
 }
 
 /* =========================
-   FESTIVALS — "How it works" modal contrast fix
+   FESTIVALS — "How it works" modal contrast fix (dark mode only)
    ========================= */
-
 body.fest-dark .modal-card{
   background: var(--card) !important;
   border-color: var(--line) !important;
   color: var(--ink) !important;
 }
-
-body.fest-dark .modal-title{
-  color: var(--ink) !important;
-}
-
+body.fest-dark .modal-title{ color: var(--ink) !important; }
 body.fest-dark .modal-body,
 body.fest-dark .modal-card p,
 body.fest-dark .modal-card li{
   color: var(--muted) !important;
 }
-
-/* Make backdrop feel correct in dark mode */
 body.fest-dark .modal-backdrop{
   background: rgba(0,0,0,.55) !important;
 }
-
-/* Button in modal */
 body.fest-dark .modal-card .primary-btn,
 body.fest-dark .modal-card .pill-btn,
 body.fest-dark .modal-card .ghost-btn{
@@ -610,37 +596,38 @@ body.fest-dark .modal-card .ghost-btn{
 }
 
 /* =========================
-   FESTIVALS — Fix search input text color (iPad/Safari)
+   FESTIVALS — Fix search input text color (iPad/Safari) (dark mode only)
    ========================= */
 body.fest-dark .search input{
   color: var(--ink) !important;
   -webkit-text-fill-color: var(--ink) !important;
   caret-color: var(--ink);
 }
-
 body.fest-dark .search input::placeholder{
   color: rgba(248,249,249,.55);
   -webkit-text-fill-color: rgba(248,249,249,.55);
 }
 
 /* =========================
-   FESTIVALS — Fix "No matches" empty state surface
+   FESTIVALS — Fix "No matches" empty state surface (dark mode only)
    ========================= */
 body.fest-dark .empty{
   background: var(--card) !important;
   border-color: var(--line) !important;
   color: var(--ink) !important;
 }
-
 body.fest-dark .empty-title{ color: var(--ink) !important; }
 body.fest-dark .empty-sub{ color: var(--muted) !important; }
 
+/* =========================
+   AI Blocks
+   ========================= */
 #aiResult .ai-block{
   border:1px solid var(--line);
   border-radius:16px;
   padding:12px;
   margin-top:10px;
-  background:rgba(255,255,255,.04);
+  background: var(--card); /* UPDATED */
 }
 #aiResult .ai-h{
   font-weight:600;
@@ -664,7 +651,7 @@ body.fest-dark .empty-sub{ color: var(--muted) !important; }
   width:34px;height:34px;
   border-radius:999px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
   color:var(--ink);
   cursor:pointer;
   font-size:20px;
@@ -691,7 +678,7 @@ body.fest-dark .empty-sub{ color: var(--muted) !important; }
   width:100%;
   border-radius:14px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
   color:var(--ink);
   padding:12px 12px;
   outline:none;
@@ -710,7 +697,7 @@ body.fest-dark .empty-sub{ color: var(--muted) !important; }
   border:1px solid var(--line);
   border-radius:16px;
   padding:14px;
-  background:rgba(255,255,255,.06);
+  background: var(--card); /* UPDATED */
 }
 
 .ai-result-title{
@@ -725,6 +712,7 @@ body.fest-dark .empty-sub{ color: var(--muted) !important; }
 }
 
 .ai-foot{ margin-top:12px; }
+
 @media (max-width:520px){
   .ai-grid{ grid-template-columns: 1fr; }
 }
