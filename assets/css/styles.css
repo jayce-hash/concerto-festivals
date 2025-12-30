@@ -716,3 +716,50 @@ body.fest-dark .empty-sub{ color: var(--muted) !important; }
 @media (max-width:520px){
   .ai-grid{ grid-template-columns: 1fr; }
 }
+
+/* =========================
+   TYPOGRAPHY — Match Featured Tours (Inter only)
+   ========================= */
+
+:root{
+  --font-ui: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+html, body { font-family: var(--font-ui); }
+
+/* Force every heading/title to Inter */
+.brand-title,
+.h1,
+.card-title,
+.empty-title,
+.modal-title,
+.ai-result-title,
+.ai-result-title,
+.detail-card h1,
+.detail-card h2,
+.detail-card h3,
+.section-title{
+  font-family: var(--font-ui) !important;
+}
+
+/* Match the Featured Tours “uppercase + spaced” look where needed */
+.brand-kicker,
+.kicker,
+.mini-label,
+.card-kicker,
+.ai-label,
+.arrival-label,
+.ess-label{
+  font-family: var(--font-ui) !important;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Optional: if you want the main page title to feel like Featured Tours h2 */
+.h1{
+  font-size: 1rem;            /* same scale vibe as Tours */
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
