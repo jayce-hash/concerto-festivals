@@ -30,6 +30,12 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 
+/* Prevent iOS Safari “auto zoom / font inflate” weirdness */
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body{
   margin:0;
   background:var(--bg);
@@ -37,9 +43,10 @@ body{
   font-family:var(--font);
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
+  overflow-x:hidden;
 }
 
-/* IMPORTANT: hard-disable any dark mode, even if JS adds fest-dark */
+/* HARD disable any dark mode, even if JS adds fest-dark */
 body.fest-dark{
   background:var(--bg) !important;
   color:var(--ink) !important;
@@ -51,9 +58,69 @@ a{color:inherit;text-decoration:none}
 .container{max-width:980px;margin:0 auto;padding:18px}
 
 /* ============================================================
-   Header (existing topbar)
-   Keep your HTML if you want—this just standardizes type.
-   If you switch to Concerto+ image header, you can add those styles too.
+   Concerto+ Style Header (MAIN Festivals page)
+   Works with:
+   <header class="page-header"> ... (logo + Festivals + tagline + How it works)
+   ============================================================ */
+
+.page-header{
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(18,30,54,.04);
+  padding: 10px 0 14px;
+}
+
+.page-header-inner{
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap: 6px;
+}
+
+.brand-logo{
+  max-width: 320px;
+  width: 86%;
+  display:block;
+  height:auto;
+}
+
+.feature-title{
+  margin: 2px 0 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.tagline{
+  margin: 0;
+  font-size: var(--fs-15);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.header-actions{ margin-top: 6px; }
+
+/* Main Festivals page uses btn-ghost */
+.btn-ghost{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size: var(--fs-14);
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  box-shadow: var(--shadow2);
+}
+.btn-ghost:hover{ background:#F5F7FB; }
+
+/* ============================================================
+   Detail page header (existing topbar system)
    ============================================================ */
 
 .topbar{
@@ -78,19 +145,35 @@ a{color:inherit;text-decoration:none}
   color: var(--muted);
 }
 
-/* Inter-only (no Cormorant) */
 .brand-title{
   font-family: var(--font);
   font-size: var(--fs-22);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
 }
 
 .topbar-actions{display:flex;gap:10px;align-items:center}
 
+/* Alias: treat ghost-btn and btn-ghost similarly (detail uses ghost-btn) */
+.ghost-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size: var(--fs-14);
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  box-shadow: var(--shadow2);
+}
+.ghost-btn:hover{ background:#F5F7FB; }
+
 /* ============================================================
    Hero typography
+   NOTE: If you want ONLY the Concerto+ header messaging,
+   you can hide the hero title/sub on the main page.
    ============================================================ */
 
 .hero{padding:10px 0 8px}
@@ -98,8 +181,8 @@ a{color:inherit;text-decoration:none}
 .h1{
   margin:0;
   font-family: var(--font);
-  font-weight: 700;
-  letter-spacing: .02em;
+  font-weight: 800;
+  letter-spacing: -.01em;
   font-size: 28px;
   line-height: 1.12;
 }
@@ -110,6 +193,14 @@ a{color:inherit;text-decoration:none}
   line-height:1.45;
   font-size: var(--fs-15);
 }
+
+/* OPTIONAL: uncomment to prevent “double heading” on main page */
+/*
+.hero .h1,
+.hero .sub{
+  display:none;
+}
+*/
 
 /* ============================================================
    Search + Filters
@@ -213,16 +304,15 @@ a{color:inherit;text-decoration:none}
   font-size: var(--fs-11);
   letter-spacing: .16em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--muted);
 }
 
-/* Inter-only title */
 .card-title{
   margin:6px 0 6px;
   font-family: var(--font);
   font-size: 20px;
-  font-weight: 650;
+  font-weight: 750;
   letter-spacing: .01em;
 }
 
@@ -247,7 +337,7 @@ a{color:inherit;text-decoration:none}
    Buttons (Concerto+/Tours vibe)
    ============================================================ */
 
-.primary-btn, .pill-btn, .ghost-btn{
+.primary-btn, .pill-btn{
   display:inline-flex;align-items:center;justify-content:center;
   border-radius:999px;
   padding:10px 14px;
@@ -270,12 +360,6 @@ a{color:inherit;text-decoration:none}
 }
 .pill-btn:hover{ background:#F5F7FB; }
 
-.ghost-btn{
-  background:#fff;
-  color:var(--ink);
-  box-shadow:var(--shadow2);
-}
-
 /* ============================================================
    Empty state
    ============================================================ */
@@ -292,7 +376,7 @@ a{color:inherit;text-decoration:none}
 .empty-title{
   font-family: var(--font);
   font-size: var(--fs-18);
-  font-weight: 650;
+  font-weight: 750;
 }
 
 .empty-sub{
@@ -320,7 +404,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.14em;
   color:var(--muted);
   text-transform:uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
@@ -344,7 +428,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.14em;
   color:var(--muted);
   text-transform:uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .mini-value{margin-top:6px;font-size: var(--fs-13)}
@@ -356,7 +440,7 @@ a{color:inherit;text-decoration:none}
   padding:14px;
   background:rgba(18,30,54,.02);
 }
-.note-title{font-weight:600}
+.note-title{font-weight:700}
 .note-sub{color:var(--muted);margin-top:6px;font-size: var(--fs-13)}
 
 /* Section cards */
@@ -380,7 +464,7 @@ a{color:inherit;text-decoration:none}
 }
 
 .section-card .section-title{
-  font-weight:600;
+  font-weight:750;
   font-size: var(--fs-14);
   letter-spacing: .02em;
 }
@@ -403,7 +487,9 @@ a{color:inherit;text-decoration:none}
   font-size: var(--fs-13);
   cursor:pointer;
   white-space:nowrap;
+  box-shadow: var(--shadow2);
 }
+.section-toggle:hover{ background:#F5F7FB; }
 
 /* Lineup */
 #lineupSection{ margin-top: 14px; }
@@ -417,7 +503,7 @@ a{color:inherit;text-decoration:none}
 
 .lineup-tab{
   border:1px solid var(--line);
-  background: var(--card);
+  background: #fff;
   border-radius:999px;
   padding:8px 12px;
   font-size: var(--fs-13);
@@ -432,9 +518,10 @@ a{color:inherit;text-decoration:none}
 .stage{
   border:1px solid var(--line);
   border-radius:16px;
-  background: var(--card);
+  background: #fff;
   margin-bottom:10px;
   overflow:hidden;
+  box-shadow: var(--shadow2);
 }
 
 .stage-head{
@@ -445,7 +532,7 @@ a{color:inherit;text-decoration:none}
   cursor:pointer;
 }
 
-.stage-title{ font-weight:600; font-size: var(--fs-14); }
+.stage-title{ font-weight:750; font-size: var(--fs-14); }
 .stage-toggle{ color: var(--muted); font-size: var(--fs-12); }
 
 .stage-body{
@@ -495,6 +582,7 @@ a{color:inherit;text-decoration:none}
   user-select:none;
   font-size:16px;
   line-height:1;
+  box-shadow: var(--shadow2);
 }
 .star-btn[aria-pressed="true"]{
   border-color: var(--accent);
@@ -514,10 +602,11 @@ a{color:inherit;text-decoration:none}
 }
 
 .arrival-card{
-  background: var(--card);
+  background: #fff;
   border:1px solid var(--line);
   border-radius:16px;
   padding:12px;
+  box-shadow: var(--shadow2);
 }
 
 .arrival-label{
@@ -525,7 +614,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.14em;
   color: var(--muted);
   text-transform:uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .arrival-rows{
@@ -546,7 +635,7 @@ a{color:inherit;text-decoration:none}
   background: rgba(18,30,54,.03);
 }
 
-.arrival-row b{ color: var(--ink); font-weight:600; }
+.arrival-row b{ color: var(--ink); font-weight:750; }
 .arrival-row span{ color: var(--muted); font-size: var(--fs-13); line-height:1.35; }
 
 .arrival-list{
@@ -566,10 +655,11 @@ a{color:inherit;text-decoration:none}
 }
 
 .ess-card{
-  background: var(--card);
+  background:#fff;
   border:1px solid var(--line);
   border-radius:16px;
   padding:12px;
+  box-shadow: var(--shadow2);
 }
 
 .ess-label{
@@ -577,7 +667,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.14em;
   color: var(--muted);
   text-transform:uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .ess-list{
@@ -612,10 +702,15 @@ a{color:inherit;text-decoration:none}
 .modal-title{
   font-family: var(--font);
   font-size: var(--fs-18);
-  font-weight: 650;
+  font-weight: 750;
 }
 
-.modal-body{color:var(--muted);margin-top:10px;line-height:1.45;font-size: var(--fs-14)}
+.modal-body{
+  color:var(--muted);
+  margin-top:10px;
+  line-height:1.45;
+  font-size: var(--fs-14);
+}
 .modal-actions{display:flex;justify-content:flex-end;margin-top:14px}
 .bullets{margin:0;padding-left:18px}
 .bullets li{margin:8px 0}
@@ -629,10 +724,10 @@ a{color:inherit;text-decoration:none}
   border-radius:16px;
   padding:12px;
   margin-top:10px;
-  background: var(--card);
+  background: #fff;
   box-shadow: var(--shadow2);
 }
-#aiResult .ai-h{ font-weight:600; margin:0 0 8px; font-size: var(--fs-14); }
+#aiResult .ai-h{ font-weight:750; margin:0 0 8px; font-size: var(--fs-14); }
 #aiResult ul{ margin:0; padding-left:18px; }
 #aiResult li{ margin:6px 0; line-height:1.35; font-size: var(--fs-13); }
 
@@ -655,6 +750,7 @@ a{color:inherit;text-decoration:none}
   cursor:pointer;
   font-size:20px;
   line-height:1;
+  box-shadow: var(--shadow2);
 }
 
 .ai-grid{
@@ -671,7 +767,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.14em;
   color:var(--muted);
   text-transform:uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .ai-input, .ai-select{
@@ -706,7 +802,7 @@ a{color:inherit;text-decoration:none}
 .ai-result-title{
   font-family: var(--font);
   font-size: var(--fs-18);
-  font-weight: 650;
+  font-weight: 750;
   margin-bottom:8px;
 }
 
@@ -737,4 +833,7 @@ a{color:inherit;text-decoration:none}
   .brand{min-width:auto}
   .h1{font-size:26px}
   .ai-grid{ grid-template-columns: 1fr; }
+
+  .brand-logo{ width: 92%; max-width: 340px; }
+  .feature-title{ font-size: 26px; }
 }
