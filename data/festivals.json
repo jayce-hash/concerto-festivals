@@ -90,7 +90,23 @@
       { "artist": "The Drums", "time": "10:45 PM" }
     ]
   },
-
+    {
+  "id": "freelyfest-2026",
+  "name": "Freely Fest",
+  "city": "Nashville",
+  "state": "TN",
+  "country": "USA",
+  "venue": "Bridgestone Arena",
+  "startDate": "2026-04-08",
+  "endDate": "2026-04-08",
+  "genres": ["Rock", "Hip-Hop", "Pop", "R&B"],
+  "hasCamping": false,
+  "coordinates": { "lat": 36.1596, "lng": -86.7786 },
+  "ticketUrl": "https://www.livenation.com/event/G5viZbzUvjnAB/freely-fest",
+  "officialUrl": "https://www.freelyfest.org",
+  "lineup": {},
+  "cityGuideVenueKey": "Bridgestone Arena"
+},
   "2024-04-14": {
     "Coachella Stage": [
       { "artist": "Ludmilla", "time": "2:05 PM" },
