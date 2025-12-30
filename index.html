@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Concerto — Festivals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,29 +30,24 @@
 </header>
 
   <main class="container">
-    <section class="hero">
-      <h1 class="h1">Find your festival. Plan the whole weekend.</h1>
-      <p class="sub">Search by name, city, or genre — then tap into tickets, city plans, and festival-day strategy.</p>
+   <section class="hero">
+  <div class="search-row">
+    <div class="search">
+      <input id="q" type="search" placeholder="Search festivals (ex: Coachella, Miami, EDM)..." autocomplete="off" />
+      <button id="clearBtn" class="icon-btn" title="Clear" aria-label="Clear">×</button>
+    </div>
 
-      <div class="search-row">
-        <div class="search">
-          <input id="q" type="search" placeholder="Search festivals (ex: Coachella, Miami, EDM)..." autocomplete="off" />
-          <button id="clearBtn" class="icon-btn" title="Clear" aria-label="Clear">×</button>
-        </div>
+    <select id="month" class="select">
+      <option value="all">All months</option>
+    </select>
 
-        <select id="month" class="select">
-          <option value="all">All months</option>
-        </select>
+    <select id="genre" class="select">
+      <option value="all">All genres</option>
+    </select>
+  </div>
 
-        <select id="genre" class="select">
-          <option value="all">All genres</option>
-        </select>
-      </div>
-
-      <div class="chips" id="quickChips">
-        <!-- quick chips injected -->
-      </div>
-    </section>
+  <div class="chips" id="quickChips"></div>
+</section>
 
     <section class="grid-wrap">
       <div class="grid-head">
