@@ -846,3 +846,18 @@ a{color:inherit;text-decoration:none}
   .brand-logo{ width: 92%; max-width: 340px; }
   .feature-title{ font-size: 26px; }
 }
+
+.brand--logo{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.topbar-logo{
+  height:28px;
+  max-width:170px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+}
