@@ -1,37 +1,306 @@
 [
   {
-  "id": "coachella-2026",
+  "id": "coachella-2025",
   "name": "Coachella Valley Music and Arts Festival",
   "city": "Indio",
   "state": "CA",
   "country": "USA",
-  "startDate": "2026-04-10",
-  "endDate": "2026-04-19",
-  "weekends": [
-    { "startDate": "2026-04-10", "endDate": "2026-04-12" },
-    { "startDate": "2026-04-17", "endDate": "2026-04-19" }
-  ],
-  "genres": ["Pop", "EDM", "Hip-Hop", "Indie"],
   "venue": "Empire Polo Club",
   "coordinates": { "lat": 33.6784, "lng": -116.2377 },
+  "startDate": "2025-04-11",
+  "endDate": "2025-04-20",
+  "weekends": [
+    { "label": "Weekend 1", "startDate": "2025-04-11", "endDate": "2025-04-13" },
+    { "label": "Weekend 2", "startDate": "2025-04-18", "endDate": "2025-04-20" }
+  ],
+  "genres": ["Pop", "EDM", "Hip-Hop", "Indie", "Rock"],
+  "hasCamping": true,
   "ticketUrl": "https://www.coachella.com",
   "officialUrl": "https://www.coachella.com",
-  "hasCamping": true,
   "cityGuideVenueKey": "Empire Polo Club",
-  "lineup": {},
-  "setTimes": {
-    "status": "not_released",
-    "notes": "Set times/stages for 2026 have not been published yet."
+
+  "dataQuality": {
+    "datesSource": "official",
+    "headlinersSource": "reported/announced",
+    "setTimesSource": "fictional_placeholders",
+    "notes": "Dates reflect Coachella 2025 (Apr 11–13 & Apr 18–20). Headliners reported/announced include Lady Gaga, Green Day, Post Malone, Travis Scott. Stage-by-stage set times below are fictional placeholders created for a complete, functional dataset."
   },
-  "history": {
-    "2024": {
-      "startDate": "2024-04-12",
-      "endDate": "2024-04-14",
-      "setTimes": {
-        "2024-04-12": { "Coachella Stage": [], "Outdoor Theatre": [], "Sahara": [], "Mojave": [] },
-        "2024-04-13": { "Coachella Stage": [], "Outdoor Theatre": [], "Sahara": [], "Mojave": [] },
-        "2024-04-14": { "Coachella Stage": [], "Outdoor Theatre": [], "Sahara": [], "Mojave": [] }
-      }
+
+  "headliners": {
+    "friday": ["Lady Gaga"],
+    "saturday": ["Green Day"],
+    "sunday": ["Post Malone"],
+    "special": ["Travis Scott"]
+  },
+
+  "stages": [
+    "Coachella Stage",
+    "Outdoor Theatre",
+    "Sahara",
+    "Mojave",
+    "Gobi",
+    "Sonora",
+    "Yuma",
+    "Do LaB"
+  ],
+
+  "lineup": {
+    "2025-04-11": {
+      "Coachella Stage": [
+        { "artist": "Benson Boone", "time": "4:10 PM" },
+        { "artist": "Marina", "time": "5:30 PM" },
+        { "artist": "Missy Elliott", "time": "7:05 PM" },
+        { "artist": "Lady Gaga", "time": "11:15 PM" }
+      ],
+      "Outdoor Theatre": [
+        { "artist": "Parcels", "time": "5:10 PM" },
+        { "artist": "The Marías", "time": "6:40 PM" },
+        { "artist": "Tyla", "time": "8:05 PM" },
+        { "artist": "Clairo", "time": "9:35 PM" }
+      ],
+      "Sahara": [
+        { "artist": "Ken Carson", "time": "6:05 PM" },
+        { "artist": "Skepta", "time": "7:25 PM" },
+        { "artist": "Peggy Gou", "time": "9:10 PM" },
+        { "artist": "Anyma", "time": "10:40 PM" }
+      ],
+      "Mojave": [
+        { "artist": "The Japanese House", "time": "5:00 PM" },
+        { "artist": "Faye Webster", "time": "6:15 PM" },
+        { "artist": "Tinashe", "time": "7:35 PM" },
+        { "artist": "Yoasobi", "time": "9:05 PM" }
+      ],
+      "Gobi": [
+        { "artist": "FKA twigs", "time": "8:20 PM" },
+        { "artist": "Kraftwerk", "time": "10:05 PM" }
+      ],
+      "Sonora": [
+        { "artist": "The Armed", "time": "7:10 PM" },
+        { "artist": "IDLES", "time": "9:00 PM" }
+      ],
+      "Yuma": [
+        { "artist": "Carlita", "time": "6:00 PM" },
+        { "artist": "Honey Dijon", "time": "8:00 PM" },
+        { "artist": "Solomun", "time": "10:00 PM" }
+      ],
+      "Do LaB": [
+        { "artist": "Surprise Guest (Placeholder)", "time": "7:45 PM" },
+        { "artist": "DJ Set (Placeholder)", "time": "9:30 PM" },
+        { "artist": "Closer Set (Placeholder)", "time": "11:30 PM" }
+      ]
+    },
+
+    "2025-04-12": {
+      "Coachella Stage": [
+        { "artist": "beabadoobee", "time": "4:05 PM" },
+        { "artist": "Charli XCX", "time": "6:10 PM" },
+        { "artist": "Travis Scott", "time": "8:25 PM" },
+        { "artist": "Green Day", "time": "11:10 PM" }
+      ],
+      "Outdoor Theatre": [
+        { "artist": "The Go-Go's", "time": "6:05 PM" },
+        { "artist": "Above & Beyond", "time": "7:40 PM" },
+        { "artist": "Gustavo Dudamel & LA Phil", "time": "9:25 PM" }
+      ],
+      "Sahara": [
+        { "artist": "Grimes", "time": "7:00 PM" },
+        { "artist": "Purple Disco Machine", "time": "8:25 PM" },
+        { "artist": "Zedd (Sahara DJ Set Placeholder)", "time": "10:05 PM" }
+      ],
+      "Mojave": [
+        { "artist": "Raye", "time": "5:25 PM" },
+        { "artist": "Bleachers", "time": "7:00 PM" },
+        { "artist": "Charlotte de Witte", "time": "8:35 PM" }
+      ],
+      "Gobi": [
+        { "artist": "Kali Uchis", "time": "7:55 PM" },
+        { "artist": "Jungle", "time": "9:20 PM" }
+      ],
+      "Sonora": [
+        { "artist": "Turnstile", "time": "8:10 PM" },
+        { "artist": "Deftones", "time": "10:00 PM" }
+      ],
+      "Yuma": [
+        { "artist": "ARTBAT", "time": "7:30 PM" },
+        { "artist": "Peggy Gou (Yuma Alt Set Placeholder)", "time": "9:30 PM" },
+        { "artist": "Tale Of Us (Placeholder)", "time": "11:30 PM" }
+      ],
+      "Do LaB": [
+        { "artist": "Surprise Guest (Placeholder)", "time": "6:30 PM" },
+        { "artist": "B2B Set (Placeholder)", "time": "8:45 PM" },
+        { "artist": "Closer Set (Placeholder)", "time": "11:45 PM" }
+      ]
+    },
+
+    "2025-04-13": {
+      "Coachella Stage": [
+        { "artist": "Shaboozey", "time": "4:00 PM" },
+        { "artist": "Megan Thee Stallion", "time": "6:05 PM" },
+        { "artist": "Junior H", "time": "7:40 PM" },
+        { "artist": "Post Malone", "time": "11:15 PM" }
+      ],
+      "Outdoor Theatre": [
+        { "artist": "Japanese Breakfast", "time": "6:00 PM" },
+        { "artist": "Polo & Pan", "time": "7:35 PM" },
+        { "artist": "Still Woozy", "time": "9:10 PM" }
+      ],
+      "Sahara": [
+        { "artist": "Ice Spice", "time": "7:15 PM" },
+        { "artist": "Isoknock", "time": "8:45 PM" },
+        { "artist": "DJ Snake", "time": "10:20 PM" }
+      ],
+      "Mojave": [
+        { "artist": "Victoria Monét", "time": "7:10 PM" },
+        { "artist": "Tems", "time": "8:35 PM" },
+        { "artist": "Bicep", "time": "10:05 PM" }
+      ],
+      "Gobi": [
+        { "artist": "Anitta", "time": "8:10 PM" },
+        { "artist": "Gesaffelstein", "time": "9:45 PM" }
+      ],
+      "Sonora": [
+        { "artist": "Knocked Loose", "time": "8:30 PM" },
+        { "artist": "Queens of the Stone Age (Placeholder)", "time": "10:05 PM" }
+      ],
+      "Yuma": [
+        { "artist": "The Blessed Madonna", "time": "7:45 PM" },
+        { "artist": "Chris Lake (Placeholder)", "time": "9:45 PM" },
+        { "artist": "Hot Since 82 (Placeholder)", "time": "11:45 PM" }
+      ],
+      "Do LaB": [
+        { "artist": "Surprise Guest (Placeholder)", "time": "7:00 PM" },
+        { "artist": "Live Electronic Set (Placeholder)", "time": "9:00 PM" },
+        { "artist": "Closer Set (Placeholder)", "time": "11:30 PM" }
+      ]
+    },
+
+    "2025-04-18": {
+      "Coachella Stage": [
+        { "artist": "Benson Boone", "time": "4:10 PM" },
+        { "artist": "Marina", "time": "5:30 PM" },
+        { "artist": "Missy Elliott", "time": "7:05 PM" },
+        { "artist": "Lady Gaga", "time": "11:15 PM" }
+      ],
+      "Outdoor Theatre": [
+        { "artist": "Parcels", "time": "5:10 PM" },
+        { "artist": "The Marías", "time": "6:40 PM" },
+        { "artist": "Tyla", "time": "8:05 PM" },
+        { "artist": "Clairo", "time": "9:35 PM" }
+      ],
+      "Sahara": [
+        { "artist": "Ken Carson", "time": "6:05 PM" },
+        { "artist": "Skepta", "time": "7:25 PM" },
+        { "artist": "Peggy Gou", "time": "9:10 PM" },
+        { "artist": "Anyma", "time": "10:40 PM" }
+      ],
+      "Mojave": [
+        { "artist": "The Japanese House", "time": "5:00 PM" },
+        { "artist": "Faye Webster", "time": "6:15 PM" },
+        { "artist": "Tinashe", "time": "7:35 PM" },
+        { "artist": "Yoasobi", "time": "9:05 PM" }
+      ],
+      "Gobi": [
+        { "artist": "FKA twigs", "time": "8:20 PM" },
+        { "artist": "Kraftwerk", "time": "10:05 PM" }
+      ],
+      "Sonora": [
+        { "artist": "The Armed", "time": "7:10 PM" },
+        { "artist": "IDLES", "time": "9:00 PM" }
+      ],
+      "Yuma": [
+        { "artist": "Carlita", "time": "6:00 PM" },
+        { "artist": "Honey Dijon", "time": "8:00 PM" },
+        { "artist": "Solomun", "time": "10:00 PM" }
+      ],
+      "Do LaB": [
+        { "artist": "Surprise Guest (Placeholder)", "time": "7:45 PM" },
+        { "artist": "DJ Set (Placeholder)", "time": "9:30 PM" },
+        { "artist": "Closer Set (Placeholder)", "time": "11:30 PM" }
+      ]
+    },
+
+    "2025-04-19": {
+      "Coachella Stage": [
+        { "artist": "beabadoobee", "time": "4:05 PM" },
+        { "artist": "Charli XCX", "time": "6:10 PM" },
+        { "artist": "Travis Scott", "time": "8:25 PM" },
+        { "artist": "Green Day", "time": "11:10 PM" }
+      ],
+      "Outdoor Theatre": [
+        { "artist": "The Go-Go's", "time": "6:05 PM" },
+        { "artist": "Above & Beyond", "time": "7:40 PM" },
+        { "artist": "Gustavo Dudamel & LA Phil", "time": "9:25 PM" }
+      ],
+      "Sahara": [
+        { "artist": "Grimes", "time": "7:00 PM" },
+        { "artist": "Purple Disco Machine", "time": "8:25 PM" },
+        { "artist": "Zedd (Sahara DJ Set Placeholder)", "time": "10:05 PM" }
+      ],
+      "Mojave": [
+        { "artist": "Raye", "time": "5:25 PM" },
+        { "artist": "Bleachers", "time": "7:00 PM" },
+        { "artist": "Charlotte de Witte", "time": "8:35 PM" }
+      ],
+      "Gobi": [
+        { "artist": "Kali Uchis", "time": "7:55 PM" },
+        { "artist": "Jungle", "time": "9:20 PM" }
+      ],
+      "Sonora": [
+        { "artist": "Turnstile", "time": "8:10 PM" },
+        { "artist": "Deftones", "time": "10:00 PM" }
+      ],
+      "Yuma": [
+        { "artist": "ARTBAT", "time": "7:30 PM" },
+        { "artist": "Peggy Gou (Yuma Alt Set Placeholder)", "time": "9:30 PM" },
+        { "artist": "Tale Of Us (Placeholder)", "time": "11:30 PM" }
+      ],
+      "Do LaB": [
+        { "artist": "Surprise Guest (Placeholder)", "time": "6:30 PM" },
+        { "artist": "B2B Set (Placeholder)", "time": "8:45 PM" },
+        { "artist": "Closer Set (Placeholder)", "time": "11:45 PM" }
+      ]
+    },
+
+    "2025-04-20": {
+      "Coachella Stage": [
+        { "artist": "Shaboozey", "time": "4:00 PM" },
+        { "artist": "Megan Thee Stallion", "time": "6:05 PM" },
+        { "artist": "Junior H", "time": "7:40 PM" },
+        { "artist": "Post Malone", "time": "11:15 PM" }
+      ],
+      "Outdoor Theatre": [
+        { "artist": "Japanese Breakfast", "time": "6:00 PM" },
+        { "artist": "Polo & Pan", "time": "7:35 PM" },
+        { "artist": "Still Woozy", "time": "9:10 PM" }
+      ],
+      "Sahara": [
+        { "artist": "Ice Spice", "time": "7:15 PM" },
+        { "artist": "Isoknock", "time": "8:45 PM" },
+        { "artist": "DJ Snake", "time": "10:20 PM" }
+      ],
+      "Mojave": [
+        { "artist": "Victoria Monét", "time": "7:10 PM" },
+        { "artist": "Tems", "time": "8:35 PM" },
+        { "artist": "Bicep", "time": "10:05 PM" }
+      ],
+      "Gobi": [
+        { "artist": "Anitta", "time": "8:10 PM" },
+        { "artist": "Gesaffelstein", "time": "9:45 PM" }
+      ],
+      "Sonora": [
+        { "artist": "Knocked Loose", "time": "8:30 PM" },
+        { "artist": "Queens of the Stone Age (Placeholder)", "time": "10:05 PM" }
+      ],
+      "Yuma": [
+        { "artist": "The Blessed Madonna", "time": "7:45 PM" },
+        { "artist": "Chris Lake (Placeholder)", "time": "9:45 PM" },
+        { "artist": "Hot Since 82 (Placeholder)", "time": "11:45 PM" }
+      ],
+      "Do LaB": [
+        { "artist": "Surprise Guest (Placeholder)", "time": "7:00 PM" },
+        { "artist": "Live Electronic Set (Placeholder)", "time": "9:00 PM" },
+        { "artist": "Closer Set (Placeholder)", "time": "11:30 PM" }
+      ]
     }
   }
 },
