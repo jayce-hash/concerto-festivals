@@ -1,160 +1,69 @@
 [
   {
-    "id": "coachella",
-    "name": "Coachella Valley Music and Arts Festival",
-    "city": "Indio",
-    "state": "CA",
-    "country": "USA",
-    "startDate": "2026-04-10",
-    "endDate": "2026-04-19",
-    "genres": ["Pop", "EDM", "Hip-Hop", "Indie"],
-    "venue": "Empire Polo Club",
-    "coordinates": { "lat": 33.6784, "lng": -116.2377 },
-    "ticketUrl": "https://www.coachella.com",
-    "officialUrl": "https://www.coachella.com",
-    "hasCamping": true,
-    "cityGuideVenueKey": "Empire Polo Club",
-    "lineup": {
-      "2024-04-12": {
-        "Coachella Stage": [
-          { "artist": "Record Safari", "time": "3:40 PM" },
-          { "artist": "Young Miko", "time": "4:45 PM" },
-          { "artist": "Sabrina Carpenter", "time": "6:00 PM" },
-          { "artist": "Lil Uzi Vert", "time": "7:35 PM" },
-          { "artist": "Peso Pluma", "time": "9:05 PM" },
-          { "artist": "Lana Del Rey", "time": "11:20 PM" }
-        ],
-        "Outdoor Theatre": [
-          { "artist": "Fundido", "time": "4:15 PM" },
-          { "artist": "L’Impératrice", "time": "5:25 PM" },
-          { "artist": "Deftones", "time": "6:45 PM" },
-          { "artist": "Everything Always", "time": "8:10 PM" },
-          { "artist": "Justice", "time": "10:15 PM" }
-        ],
-        "Sahara": [
-          { "artist": "Sincerely, Manolo", "time": "2:00 PM" },
-          { "artist": "Skin on Skin", "time": "3:00 PM" },
-          { "artist": "Cloonee", "time": "4:00 PM" },
-          { "artist": "Ken Carson", "time": "5:20 PM" },
-          { "artist": "Skepta", "time": "6:30 PM" },
-          { "artist": "Bizarrap", "time": "7:45 PM" },
-          { "artist": "Peggy Gou", "time": "9:15 PM" },
-          { "artist": "Ateez", "time": "10:45 PM" }
-        ],
-        "Mojave": [
-          { "artist": "Daysonmarket.", "time": "2:10 PM" },
-          { "artist": "Mall Grab", "time": "3:15 PM" },
-          { "artist": "The Japanese House", "time": "4:30 PM" },
-          { "artist": "Faye Webster", "time": "5:40 PM" },
-          { "artist": "Tinashe", "time": "6:55 PM" },
-          { "artist": "Yoasobi", "time": "8:20 PM" },
-          { "artist": "Hatsune Miku", "time": "9:50 PM" },
-          { "artist": "Anti Up", "time": "11:15 PM" }
-        ]
-      },
-      "2024-04-13": {
-        "Coachella Stage": [
-          { "artist": "Jaqck Glam", "time": "3:45 PM" },
-          { "artist": "Santa Fe Klan", "time": "4:45 PM" },
-          { "artist": "Sublime", "time": "6:05 PM" },
-          { "artist": "Blur", "time": "7:40 PM" },
-          { "artist": "No Doubt", "time": "9:25 PM" },
-          { "artist": "Tyler, the Creator", "time": "11:40 PM" }
-        ],
-        "Outdoor Theatre": [
-          { "artist": "Vampire Weekend", "time": "5:00 PM" },
-          { "artist": "Blxst", "time": "6:10 PM" },
-          { "artist": "Jon Batiste", "time": "7:25 PM" },
-          { "artist": "Jungle", "time": "8:40 PM" },
-          { "artist": "Gesaffelstein", "time": "10:40 PM" }
-        ],
-        "Sahara": [
-          { "artist": "Loboman", "time": "2:00 PM" },
-          { "artist": "Starrza", "time": "3:10 PM" },
-          { "artist": "Destroy Lonely", "time": "4:30 PM" },
-          { "artist": "Purple Disco Machine", "time": "5:40 PM" },
-          { "artist": "Grimes", "time": "7:10 PM" },
-          { "artist": "Ice Spice", "time": "8:30 PM" },
-          { "artist": "Isoknock", "time": "9:30 PM" },
-          { "artist": "Le Sserafim", "time": "10:50 PM" }
-        ],
-        "Mojave": [
-          { "artist": "Anika Kai", "time": "2:00 PM" },
-          { "artist": "Kenya Grace", "time": "3:05 PM" },
-          { "artist": "Raye", "time": "4:10 PM" },
-          { "artist": "Kevin Abstract", "time": "5:25 PM" },
-          { "artist": "Bleachers", "time": "6:50 PM" },
-          { "artist": "Charlotte de Witte", "time": "8:05 PM" },
-          { "artist": "Coi Leray", "time": "9:50 PM" },
-          { "artist": "The Drums", "time": "10:45 PM" }
-        ]
-      },
-      "2024-04-14": {
-        "Coachella Stage": [
-          { "artist": "Ludmilla", "time": "2:05 PM" },
-          { "artist": "YG Marley", "time": "4:05 PM" },
-          { "artist": "Carin León", "time": "5:25 PM" },
-          { "artist": "J Balvin", "time": "8:20 PM" },
-          { "artist": "Doja Cat", "time": "10:25 PM" }
-        ],
-        "Outdoor Theatre": [
-          { "artist": "Tiffany Tyson", "time": "3:55 PM" },
-          { "artist": "Reneé Rapp", "time": "5:05 PM" },
-          { "artist": "The Rose", "time": "6:25 PM" },
-          { "artist": "Khruangbin", "time": "7:50 PM" },
-          { "artist": "Jhené Aiko", "time": "9:30 PM" }
-        ],
-        "Sahara": [
-          { "artist": "Bones", "time": "2:00 PM" },
-          { "artist": "Tita Lau", "time": "3:00 PM" },
-          { "artist": "Spinall", "time": "4:00 PM" },
-          { "artist": "AP Dhillon", "time": "5:10 PM" },
-          { "artist": "Nav", "time": "6:20 PM" },
-          { "artist": "Anyma", "time": "7:45 PM" },
-          { "artist": "DJ Snake", "time": "9:15 PM" },
-          { "artist": "John Summit", "time": "10:55 PM" }
-        ],
-        "Mojave": [
-          { "artist": "Honey Roots", "time": "2:00 PM" },
-          { "artist": "Flo", "time": "3:00 PM" },
-          { "artist": "Taking Back Sunday", "time": "4:10 PM" },
-          { "artist": "88rising Futures", "time": "5:20 PM" },
-          { "artist": "Victoria Monét", "time": "6:55 PM" },
-          { "artist": "Tems", "time": "8:10 PM" },
-          { "artist": "Lil Yachty", "time": "9:25 PM" },
-          { "artist": "Bicep", "time": "10:40 PM" }
-        ]
+  "id": "coachella-2026",
+  "name": "Coachella Valley Music and Arts Festival",
+  "city": "Indio",
+  "state": "CA",
+  "country": "USA",
+  "startDate": "2026-04-10",
+  "endDate": "2026-04-19",
+  "weekends": [
+    { "startDate": "2026-04-10", "endDate": "2026-04-12" },
+    { "startDate": "2026-04-17", "endDate": "2026-04-19" }
+  ],
+  "genres": ["Pop", "EDM", "Hip-Hop", "Indie"],
+  "venue": "Empire Polo Club",
+  "coordinates": { "lat": 33.6784, "lng": -116.2377 },
+  "ticketUrl": "https://www.coachella.com",
+  "officialUrl": "https://www.coachella.com",
+  "hasCamping": true,
+  "cityGuideVenueKey": "Empire Polo Club",
+  "lineup": {},
+  "setTimes": {
+    "status": "not_released",
+    "notes": "Set times/stages for 2026 have not been published yet."
+  },
+  "history": {
+    "2024": {
+      "startDate": "2024-04-12",
+      "endDate": "2024-04-14",
+      "setTimes": {
+        "2024-04-12": { "Coachella Stage": [], "Outdoor Theatre": [], "Sahara": [], "Mojave": [] },
+        "2024-04-13": { "Coachella Stage": [], "Outdoor Theatre": [], "Sahara": [], "Mojave": [] },
+        "2024-04-14": { "Coachella Stage": [], "Outdoor Theatre": [], "Sahara": [], "Mojave": [] }
       }
     }
-  },
+  }
+},
 {
   "id": "freelyfest-2026",
   "name": "Freely Fest",
   "city": "Nashville",
   "state": "TN",
   "country": "USA",
-  "venue": "Bridgestone Arena",
   "startDate": "2026-04-08",
   "endDate": "2026-04-08",
-  "genres": ["Rock", "Hip-Hop", "Pop", "R&B"],
-  "hasCamping": false,
+  "genres": ["Music Festival", "Multi-Genre"],
+  "venue": "Bridgestone Arena",
   "coordinates": { "lat": 36.1596, "lng": -86.7786 },
   "ticketUrl": "https://www.livenation.com/event/G5viZbzUvjnAB/freely-fest",
   "officialUrl": "https://www.freelyfest.org",
-  "lineup": {
-    "headline": [
-      "The Killers"
-    ],
-    "artists": [
-      "The Killers",
-      "T-Pain",
-      "Dominic Fike",
-      "Janelle Monáe",
-      "Avery Anna"
-    ]
-  },
+  "hasCamping": false,
   "cityGuideVenueKey": "Bridgestone Arena",
-  "description": "Freely Fest is a new music festival celebrating the power of music and the freedoms protected by the First Amendment, presented by the Freedom Forum. The one-day event features a diverse lineup of artists across genres and will take place at Bridgestone Arena in Nashville on April 8, 2026."
+  "description": "Freely Fest is a new music festival celebrating the power of music and the freedoms protected by the First Amendment, presented by Freedom Forum at Bridgestone Arena in Nashville on April 8, 2026.",
+  "lineup": {
+    "2026-04-08": {
+      "Bridgestone Arena": [
+        { "artist": "The Killers", "time": "" },
+        { "artist": "T-Pain", "time": "" },
+        { "artist": "Dominic Fike", "time": "" },
+        { "artist": "Janelle Monáe", "time": "" },
+        { "artist": "Avery Anna", "time": "" }
+      ]
+    }
+  },
+  "eventStartTimeLocal": "5:30 PM",
+  "notes": "Festival takes place April 8, 2026 at Bridgestone Arena and is promoted by Freedom Forum; performance set times/stage schedule not yet posted on the official site."
 },
   {
     "id": "stagecoach",
