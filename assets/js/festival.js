@@ -602,7 +602,7 @@ function openAiModal(f){
 async function init(){
   const id = qs("festival");
   if(!id){
-    document.getElementById("festivalTitle").textContent = "FESTIVAL";
+    document.getElementById("festivalTitle").textContent = "";
     document.getElementById("festivalName").textContent = "Missing festival id";
     return;
   }
@@ -612,14 +612,14 @@ async function init(){
   const f = list.find(x => x.id === id);
 
   if(!f){
-    document.getElementById("festivalTitle").textContent = "FESTIVAL";
+    document.getElementById("festivalTitle").textContent = "";
     document.getElementById("festivalName").textContent = "Festival not found";
     document.getElementById("festivalMeta").textContent = "Check the URL id.";
     return;
   }
 
   document.title = `Concerto — ${f.name}`;
-  document.getElementById("festivalTitle").textContent = "FESTIVAL";
+  document.getElementById("festivalTitle").textContent = "";
   document.getElementById("festivalName").textContent = f.name;
 
   const loc = `${f.city}${f.state ? ", " + f.state : ""}${f.country ? " • " + f.country : ""}`;
