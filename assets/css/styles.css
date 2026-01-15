@@ -837,3 +837,30 @@ a{color:inherit;text-decoration:none}
   .brand-logo{ width: 92%; max-width: 340px; }
   .feature-title{ font-size: 26px; }
 } 
+
+/* Topbar: keep Back left, Logo centered, Website right */
+.topbar-inner{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+/* Center the brand/logo */
+.brand{
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo sizing */
+.brand-logo{
+  height: 22px;   /* tweak: 20–26 */
+  width: auto;
+  display: block;
+}
+
+/* Keep Website aligned right */
+.topbar-actions{
+  justify-self: end;
+}
