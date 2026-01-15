@@ -127,34 +127,23 @@
       }
     }
   },
-{
-  "id": "freelyfest-2026",
-  "name": "Freely Fest",
-  "city": "Nashville",
-  "state": "TN",
-  "country": "USA",
-  "venue": "Bridgestone Arena",
-  "startDate": "2026-04-08",
-  "endDate": "2026-04-08",
-  "genres": ["Rock", "Hip-Hop", "Pop", "R&B"],
-  "hasCamping": false,
-  "coordinates": { "lat": 36.1596, "lng": -86.7786 },
-  "ticketUrl": "https://www.livenation.com/event/G5viZbzUvjnAB/freely-fest",
-  "officialUrl": "https://www.freelyfest.org",
-  "lineup": {},
-  "cityGuideVenueKey": "Bridgestone Arena",
-  "brand": {
-    "logo": "https://cdn.prod.website-files.com/693c62b026ed2a5b150c0c3d/69415363aab88683711010dd_FreelyFest-PrimaryLogo_White.webp",
-    "palette": {
-      "bg": "#0B0B0B",
-      "card": "#121212",
-      "ink": "#F8F9F9",
-      "muted": "rgba(248,249,249,.72)",
-      "line": "rgba(248,249,249,.14)",
-      "accent": "#F4D000"
-    }
-  }
-},
+  {
+    "id": "freelyfest-2026",
+    "name": "Freely Fest",
+    "city": "Nashville",
+    "state": "TN",
+    "country": "USA",
+    "venue": "Bridgestone Arena",
+    "startDate": "2026-04-08",
+    "endDate": "2026-04-08",
+    "genres": ["Rock", "Hip-Hop", "Pop", "R&B"],
+    "hasCamping": false,
+    "coordinates": { "lat": 36.1596, "lng": -86.7786 },
+    "ticketUrl": "https://www.livenation.com/event/G5viZbzUvjnAB/freely-fest",
+    "officialUrl": "https://www.freelyfest.org",
+    "lineup": {},
+    "cityGuideVenueKey": "Bridgestone Arena"
+  },
   {
     "id": "stagecoach",
     "name": "Stagecoach Festival",
