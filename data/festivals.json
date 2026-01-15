@@ -127,23 +127,35 @@
       }
     }
   },
-  {
-    "id": "freelyfest-2026",
-    "name": "Freely Fest",
-    "city": "Nashville",
-    "state": "TN",
-    "country": "USA",
-    "venue": "Bridgestone Arena",
-    "startDate": "2026-04-08",
-    "endDate": "2026-04-08",
-    "genres": ["Rock", "Hip-Hop", "Pop", "R&B"],
-    "hasCamping": false,
-    "coordinates": { "lat": 36.1596, "lng": -86.7786 },
-    "ticketUrl": "https://www.livenation.com/event/G5viZbzUvjnAB/freely-fest",
-    "officialUrl": "https://www.freelyfest.org",
-    "lineup": {},
-    "cityGuideVenueKey": "Bridgestone Arena"
+{
+  "id": "freelyfest-2026",
+  "name": "Freely Fest",
+  "city": "Nashville",
+  "state": "TN",
+  "country": "USA",
+  "venue": "Bridgestone Arena",
+  "startDate": "2026-04-08",
+  "endDate": "2026-04-08",
+  "genres": ["Rock", "Hip-Hop", "Pop", "R&B"],
+  "hasCamping": false,
+  "coordinates": { "lat": 36.1596, "lng": -86.7786 },
+  "ticketUrl": "https://www.livenation.com/event/G5viZbzUvjnAB/freely-fest",
+  "officialUrl": "https://www.freelyfest.org",
+  "lineup": {
+    "headline": [
+      "The Killers"
+    ],
+    "artists": [
+      "The Killers",
+      "T-Pain",
+      "Dominic Fike",
+      "Janelle Monáe",
+      "Avery Anna"
+    ]
   },
+  "cityGuideVenueKey": "Bridgestone Arena",
+  "description": "Freely Fest is a new music festival celebrating the power of music and the freedoms protected by the First Amendment, presented by the Freedom Forum. The one-day event features a diverse lineup of artists across genres and will take place at Bridgestone Arena in Nashville on April 8, 2026."
+},
   {
     "id": "stagecoach",
     "name": "Stagecoach Festival",
