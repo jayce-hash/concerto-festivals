@@ -837,3 +837,37 @@ a{color:inherit;text-decoration:none}
   .brand-logo{ width: 92%; max-width: 340px; }
   .feature-title{ font-size: 26px; }
 }
+
+/* ============================================================
+   Detail page topbar logo sizing (prevents header from breaking)
+   ============================================================ */
+
+.topbar .brand{
+  min-width: 0;              /* override earlier min-width behavior */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex: 1 1 auto;
+}
+
+.topbar .brand-logo{
+  width: auto;               /* stop the 86% behavior */
+  max-width: 180px;          /* adjust to taste */
+  height: 26px;              /* keeps it sleek like Concerto+ */
+  object-fit: contain;
+  display:block;
+}
+
+/* Ensure left/right buttons don't shrink weirdly */
+.topbar .ghost-btn,
+.topbar-actions{
+  flex: 0 0 auto;
+}
+
+/* Mobile tweak */
+@media (max-width: 520px){
+  .topbar .brand-logo{
+    max-width: 150px;
+    height: 22px;
+  }
+}
