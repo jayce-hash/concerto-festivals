@@ -11,6 +11,15 @@ Inter-only typography + normalized sizing (Concerto+/Tours vibe)
   --card:#FFFFFF;
   --accent:#1F2B4A;
 
+  /* ADD */
+  --accent2:#4DE1FF;
+  --radius:18px;
+  --font-display:"Cormorant Garamond", serif;
+  --font-body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+
+  /* keep your shadows + scale */
+}
+
   --shadow:0 10px 30px rgba(18,30,54,.10);
   --shadow2:0 3px 12px rgba(18,30,54,.10);
 
