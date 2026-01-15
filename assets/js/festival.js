@@ -20,42 +20,6 @@ function formatRange(f){
   return `${a}–${b}, ${year}`;
 }
 
-function applyFestivalBrand(f){
-  const b = f.brand || {};
-  const p = b.palette || {};
-
-  const r = document.documentElement;
-
-  // Palette
-  if (p.bg) r.style.setProperty("--bg", p.bg);
-  if (p.card) r.style.setProperty("--card", p.card);
-  if (p.ink) r.style.setProperty("--ink", p.ink);
-  if (p.muted) r.style.setProperty("--muted", p.muted);
-  if (p.line) r.style.setProperty("--line", p.line);
-  if (p.accent) r.style.setProperty("--accent", p.accent);
-  if (p.accent2) r.style.setProperty("--accent2", p.accent2);
-
-  // Radius
-  if (typeof b.radius === "number") r.style.setProperty("--radius", `${b.radius}px`);
-
-  // Fonts
-  if (b.fonts?.display) r.style.setProperty("--font-display", `"${b.fonts.display}", serif`);
-  if (b.fonts?.body) r.style.setProperty("--font-body", `"${b.fonts.body}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif`);
-
-  // Favicon
-  if (b.favicon) setFavicon(b.favicon);
-}
-
-function setFavicon(href){
-  let link = document.querySelector("link[rel='icon']");
-  if(!link){
-    link = document.createElement("link");
-    link.rel = "icon";
-    document.head.appendChild(link);
-  }
-  link.href = href;
-}
-
 /* =========================
    1) Arrival (defaults + overrides)
    ========================= */
@@ -643,9 +607,9 @@ async function init(){
     return;
   }
 
-const res = await fetch(DATA_URL, { cache:"no-store" });
-const list = await res.json();
-const f = list.find(x => x.id === id);
+  const res = await fetch(DATA_URL, { cache:"no-store" });
+  const list = await res.json();
+  const f = list.find(x => x.id === id);
 
   if(!f){
     document.getElementById("festivalTitle").textContent = "FESTIVAL";
@@ -653,10 +617,6 @@ const f = list.find(x => x.id === id);
     document.getElementById("festivalMeta").textContent = "Check the URL id.";
     return;
   }
-
-// APPLY FESTIVAL THEME
-applyFestivalBrand(f);
-setTopbarLogo(f);
 
   document.title = `Concerto — ${f.name}`;
   document.getElementById("festivalTitle").textContent = "FESTIVAL";
@@ -726,4 +686,4 @@ setTopbarLogo(f);
   initSectionToggles();
 }
 
-init().catch(console.error);
+init().catch(console.error); 
