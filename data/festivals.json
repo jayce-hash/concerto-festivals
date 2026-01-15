@@ -143,7 +143,6 @@
   "officialUrl": "https://www.freelyfest.org",
   "lineup": {},
   "cityGuideVenueKey": "Bridgestone Arena",
-
   "brand": {
     "logo": "https://cdn.prod.website-files.com/693c62b026ed2a5b150c0c3d/69415363aab88683711010dd_FreelyFest-PrimaryLogo_White.webp",
     "palette": {
@@ -154,7 +153,8 @@
       "line": "rgba(248,249,249,.14)",
       "accent": "#F4D000"
     }
-  },
+  }
+},
   {
     "id": "stagecoach",
     "name": "Stagecoach Festival",
