@@ -752,5 +752,21 @@
     "officialUrl": "https://madeinamericafest.com",
     "hasCamping": false,
     "cityGuideVenueKey": "Benjamin Franklin Parkway"
-  }
+  },
+ {
+  "id": "sips-and-sounds",
+  "name": "Sips & Sounds Music Festival",
+  "city": "Austin",
+  "state": "TX",
+  "country": "USA",
+  "startDate": "2026-03-06",
+  "endDate": "2026-03-07",
+  "genres": ["Pop", "Indie", "Alternative", "Rock"],
+  "venue": "Auditorium Shores at Town Lake Metropolitan Park",
+  "coordinates": { "lat": 30.2599, "lng": -97.7494 },
+  "ticketUrl": "https://www.sipssoundsfest.com",
+  "officialUrl": "https://www.sipssoundsfest.com",
+  "hasCamping": false,
+  "cityGuideVenueKey": "Auditorium Shores"
+}
 ]
