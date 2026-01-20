@@ -45,11 +45,11 @@ function uniq(arr){ return [...new Set(arr)].filter(Boolean); }
 function buildFilters(list){
   const months = uniq(list.map(f => monthKey(f.startDate)));
   months.sort((a,b)=> new Date(`${a} 1, 2000`) - new Date(`${b} 1, 2000`));
-  month.innerHTML = `<option value="all">All months</option>` +
+  month.innerHTML = `<option value="all">All Months</option>` +
     months.map(m => `<option value="${m}">${m}</option>`).join("");
 
   const genres = uniq(list.flatMap(f => f.genres || [])).sort((a,b)=>a.localeCompare(b));
-  genre.innerHTML = `<option value="all">All genres</option>` +
+  genre.innerHTML = `<option value="all">All Genres</option>` +
     genres.map(g => `<option value="${g}">${g}</option>`).join("");
 
   // quick chips (common intents)
